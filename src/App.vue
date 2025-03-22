@@ -1,7 +1,7 @@
-<script setup>
-import HelloWorld from "./components/HelloWorld.vue";
-</script>
-
 <template>
-  <HelloWorld msg="Vite + Vue" />
+  <HeroSection />
 </template>
+
+<script setup>
+import HeroSection from "./components/HeroSection.vue";
+</script>
