@@ -2,5 +2,8 @@ body {
   padding: 0;
   margin: 0;
   border-box: box-sizing;
-  background-color: #fff;
+}
+
+.dark {
+  background-color: var(--h-sky-200);
 }
