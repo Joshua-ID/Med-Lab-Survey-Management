@@ -1,9 +1,17 @@
-body {
+* {
   padding: 0;
   margin: 0;
   border-box: box-sizing;
 }
 
-.dark {
-  background-color: var(--h-sky-200);
+:root {
+  /* --primary-background: var(--h-blue-800); */
 }
+
+.dark {
+  background-color: var(--h-violet-950);
+}
+
+/* #section {
+  max-width: 1440px;
+} */

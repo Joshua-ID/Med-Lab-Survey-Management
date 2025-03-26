@@ -1,32 +1,25 @@
 <template>
-  <h1 class="text">{{ text }}</h1>
-
-  <InputText v-model="text" />
-  <Button class="change" label="Click Me" />
-  <Button label="Toggle Dark Mode" @click="clickToggleMood()" />
+  <ToggleSwitch aria-label="toggle display color" />
 </template>
 
 <script>
-import InputText from "primevue/inputtext";
-import Button from "primevue/button";
+import { ToggleSwitch } from "primevue";
 
 export default {
-  name: "HeroSection",
+  name: "toggleMoodComponent",
   components: {
-    InputText,
-    Button,
+    ToggleSwitch,
   },
   data() {
     return {
-      text: "",
       darkMood: false,
+      toggleMood: false,
     };
   },
-
   methods: {
     // Apply the theme by adding/removing classes on the body
     applyTheme() {
-      if (!this.darkMood) {
+      if (this.darkMood) {
         document.body.classList.add("dark");
       } else {
         document.body.classList.remove("dark");
@@ -51,8 +44,10 @@ export default {
     const savedTheme = localStorage.getItem("theme");
     if (savedTheme) {
       this.darkMood = savedTheme === "dark";
+      this.toggleMood = savedTheme === "dark";
     } else {
       this.darkMood = systemPreference;
+      this.toggleMood = systemPreference;
     }
 
     // Apply the theme on page load
@@ -60,12 +55,4 @@ export default {
   },
 };
 </script>
-
-<style>
-.text {
-  color: yellow;
-}
-.change {
-  background-color: var(--h-red-600);
-}
-</style>
+<style></style>
