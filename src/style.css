@@ -4,14 +4,6 @@
   border-box: box-sizing;
 }
 
-:root {
-  /* --primary-background: var(--h-blue-800); */
-}
-
 .dark {
   background-color: var(--h-violet-950);
 }
-
-/* #section {
-  max-width: 1440px;
-} */

@@ -1,7 +1,7 @@
 <template>
   <div class="app">
     <HeaderNavigator />
-    <!-- <HeroSection /> -->
+    <HeroSection />
   </div>
 </template>
 

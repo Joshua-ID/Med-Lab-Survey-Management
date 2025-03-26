@@ -9,7 +9,7 @@
         <img src="../assets/svgs/brand-logo.svg" />
       </template>
       <template #item="{ item, props, hasSubmenu, root }">
-        <a v-ripple v-bind="props.action">
+        <a v-bind="props.action">
           <span>{{ item.label }}</span>
           <Badge
             v-if="item.badge"
@@ -52,6 +52,9 @@ export default {
           label: "Product",
         },
         {
+          label: "Solution",
+        },
+        {
           label: "Service",
           badge: 3,
           items: [
@@ -77,9 +80,10 @@ export default {
 
 <style>
 .container-wrapper {
-  background: #043873;
+  background-color: var(--st-surface-background);
   display: flex;
   justify-content: center;
+  height: 60px;
 
   .header-navigator-container {
     background-color: transparent !important;

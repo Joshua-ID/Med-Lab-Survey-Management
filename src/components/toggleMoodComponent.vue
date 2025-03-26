@@ -1,5 +1,9 @@
 <template>
-  <ToggleSwitch aria-label="toggle display color" />
+  <ToggleSwitch
+    aria-label="toggle display color"
+    v-model="toggleMood"
+    @click="clickToggleMood()"
+  />
 </template>
 
 <script>
