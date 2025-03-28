@@ -8,33 +8,20 @@ import "primeicons/primeicons.css";
 import Button from "primevue/button";
 import InputText from "primevue/inputtext";
 import { definePreset } from "@primevue/themes";
+import router from "./router/index.js"; // Import router
 
 const app = createApp(App);
 
 const MyPreset = definePreset(Aura, {
   semantic: {
     colorScheme: {
-      light: {
-        surface: {
-          background: "#043873",
-          text: "{purple.200}",
-          800: "{purple.800}",
-          900: "{purple.900}",
-          950: "{purple.950}",
-        },
-      },
-      dark: {
-        surface: {
-          background: "#FF5758",
-          text: "{blue.900}",
-          800: "{blue.800}",
-          900: "{blue.900}",
-          950: "{blue.950}",
-        },
-      },
+      light: { surface: { background: "#043873", text: "{purple.200}" } },
+      dark: { surface: { background: "#FF5758", text: "{blue.900}" } },
     },
   },
 });
+
+app.use(router); // Use router
 
 app.use(PrimeVue, {
   ripple: true,
@@ -47,7 +34,7 @@ app.use(PrimeVue, {
   },
 });
 
-// register component globally
+// Register components globally
 app.component("Button", Button);
 app.component("InputText", InputText);
 

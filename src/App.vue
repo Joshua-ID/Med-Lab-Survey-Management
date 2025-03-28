@@ -1,14 +1,10 @@
 <template>
   <div class="app">
-    <HeaderNavigator />
-    <HeroSection />
+    <router-view />
   </div>
 </template>
 
-<script setup>
-import HeaderNavigator from "./views/HeaderNavigator.vue";
-import HeroSection from "./views/HeroSection.vue";
-</script>
+<script setup></script>
 <style>
 .app {
   margin: 0 auto;
