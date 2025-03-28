@@ -7,20 +7,26 @@
           v-model="email"
           size="large"
           placeholder="Enter your email"
-          class="input-field"
           variant="filled"
         />
 
-        <InputText
-          v-model="password"
+        <Password
           size="large"
-          type="password"
           placeholder="Enter your password"
-          class="input-field"
           variant="filled"
+          v-model="password"
+          promptLabel="Choose a password"
+          strongLabel="Strong password"
+          toggleMask
         />
       </div>
-      <Button type="submit" label="Login" class="auth-button" @click="login" />
+      <Button
+        :loading="loading"
+        type="submit"
+        label="Login"
+        class="auth-button"
+        @click="register"
+      />
       <span class="redirect-text">
         Already have an account?
         <router-link class="external-link" to="/auth-login">Login</router-link>
@@ -33,16 +39,25 @@
 import { auth, db } from "../firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
+import { useToast } from "primevue";
 
 export default {
+  name: "Register",
+  components: { useToast },
+  setup() {
+    const toast = useToast();
+    return { toast };
+  },
   data() {
     return {
       email: "",
       password: "",
+      loading: false,
     };
   },
   methods: {
     async register() {
+      this.loading = true;
       try {
         const userCredential = await createUserWithEmailAndPassword(
           auth,
@@ -62,9 +77,28 @@ export default {
         );
         this.$router.push("/dashboard");
       } catch (error) {
-        alert(error.message);
+        this.toast.add({
+          severity: "error",
+          summary: "Login Failed",
+          detail: error.message,
+          life: 3000,
+        });
+      } finally {
+        this.toast.add({
+          severity: "success",
+          summary: "Registration Successful",
+          detail: "Login",
+          life: 10000,
+        });
+        this.loading = false;
+        this.loading = false;
       }
     },
   },
 };
 </script>
+<style>
+.password-input {
+  width: 100%;
+}
+</style>

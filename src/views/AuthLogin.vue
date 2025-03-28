@@ -11,16 +11,21 @@
           variant="filled"
         />
 
-        <InputText
-          v-model="password"
+        <Password
           size="large"
-          type="password"
           placeholder="Enter your password"
-          class="input-field"
           variant="filled"
+          v-model="password"
+          toggleMask
         />
       </div>
-      <Button type="submit" label="Login" class="auth-button" @click="login" />
+      <Button
+        :loading="loading"
+        type="submit"
+        label="Login"
+        class="auth-button"
+        @click="login"
+      />
       <span class="redirect-text">
         Don't have an account?
         <router-link class="external-link" to="/register">Sign Up</router-link>
@@ -33,17 +38,24 @@
 import { auth, db } from "../firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
+import { useToast } from "primevue";
 
 export default {
-  components: {},
+  components: { useToast },
+  setup() {
+    const toast = useToast();
+    return { toast };
+  },
   data() {
     return {
       email: "",
       password: "",
+      loading: false,
     };
   },
   methods: {
     async login() {
+      this.loading = true;
       try {
         const userCredential = await signInWithEmailAndPassword(
           auth,
@@ -64,10 +76,28 @@ export default {
             this.$router.push("/dashboard");
           }
         } else {
-          alert("User data not found!");
+          this.toast.add({
+            severity: "warn",
+            summary: "Error",
+            detail: "User data not found!",
+            life: 3000,
+          });
         }
       } catch (error) {
-        alert(error.message);
+        this.toast.add({
+          severity: "error",
+          summary: "Login Failed",
+          detail: error.message,
+          life: 3000,
+        });
+      } finally {
+        this.toast.add({
+          severity: "success",
+          summary: "Successful Login",
+          detail: "Login",
+          life: 10000,
+        });
+        this.loading = false;
       }
     },
   },

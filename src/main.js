@@ -5,10 +5,9 @@ import Aura from "@primevue/themes/aura";
 import "./style.css";
 import "primeicons/primeicons.css";
 
-import Button from "primevue/button";
-import InputText from "primevue/inputtext";
 import { definePreset } from "@primevue/themes";
 import router from "./router/index.js"; // Import router
+import { Password, Toast, Button, InputText, ToastService } from "primevue";
 
 const app = createApp(App);
 
@@ -22,6 +21,7 @@ const MyPreset = definePreset(Aura, {
 });
 
 app.use(router); // Use router
+app.use(ToastService); //user toast service
 
 app.use(PrimeVue, {
   ripple: true,
@@ -37,5 +37,7 @@ app.use(PrimeVue, {
 // Register components globally
 app.component("Button", Button);
 app.component("InputText", InputText);
+app.component("Password", Password);
+app.component("Toast", Toast);
 
 app.mount("#app");

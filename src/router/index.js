@@ -5,6 +5,7 @@ import Login from "../views/AuthLogin.vue";
 import Register from "../views/Register.vue";
 import Dashboard from "../views/Dashboard.vue";
 import AdminPanel from "../views/AdminPanel.vue";
+import NotFoundPage from "../views/NotFoundPage.vue";
 
 const routes = [
   { path: "/", redirect: "/auth-login" },
@@ -20,6 +21,13 @@ const routes = [
     component: AdminPanel,
     meta: { requiresAuth: true, requiresAdmin: true },
   },
+
+  // 404 page
+  {
+    path: "/:pathMatch(.*)*",
+    name: "NotFound",
+    component: NotFoundPage,
+  },
 ];
 
 const router = createRouter({
@@ -30,8 +38,7 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
   const requiresAuth = to.meta.requiresAuth;
   const requiresAdmin = to.meta.requiresAdmin;
-  const user = JSON.parse(localStorage.getItem("user")); // ✅ Get user from localStorage
-
+  const user = JSON.parse(localStorage.getItem("user"));
   if (requiresAuth && !user) {
     next("/auth-login"); // Redirect to login if not authenticated
   } else if (requiresAdmin && (!user || user.role !== "admin")) {
