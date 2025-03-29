@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
+import { addDoc, collection, getDocs, getFirestore } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
@@ -15,5 +15,25 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const auth = getAuth(app);
+
+export const addPatientToFirestore = async (patient) => {
+  try {
+    const docRef = await addDoc(collection(db, "patients"), patient);
+    console.log("Patient added with ID:", docRef.id);
+    return docRef.id;
+  } catch (error) {
+    console.error("Error adding patient:", error);
+  }
+};
+
+export const fetchPatientsFromFirestore = async () => {
+  try {
+    const querySnapshot = await getDocs(collection(db, "patients"));
+    return querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+  } catch (error) {
+    console.error("Error fetching patients from Firestore:", error);
+    return [];
+  }
+};
 
 export { db, auth };
