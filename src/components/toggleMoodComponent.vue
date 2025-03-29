@@ -24,9 +24,9 @@ export default {
     // Apply the theme by adding/removing classes on the body
     applyTheme() {
       if (this.darkMood) {
-        document.body.classList.add("dark");
-      } else {
         document.body.classList.remove("dark");
+      } else {
+        document.body.classList.add("dark");
       }
       localStorage.setItem("theme", this.darkMood ? "dark" : "light"); // Save the theme preference in localStorage
     },

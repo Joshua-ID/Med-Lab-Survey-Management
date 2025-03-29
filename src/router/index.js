@@ -9,8 +9,11 @@ import NotFoundPage from "../views/NotFoundPage.vue";
 
 const routes = [
   { path: "/", redirect: "/auth-login" },
+
   { path: "/auth-login", component: Login },
+
   { path: "/register", component: Register },
+
   {
     path: "/dashboard",
     component: Dashboard,
@@ -19,7 +22,11 @@ const routes = [
   {
     path: "/admin",
     component: AdminPanel,
-    meta: { requiresAuth: true, requiresAdmin: true },
+  },
+
+  {
+    path: "/admin-users",
+    component: () => import("../views/AdminUsers.vue"),
   },
 
   // 404 page
@@ -36,15 +43,13 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  const requiresAuth = to.meta.requiresAuth;
-  const requiresAdmin = to.meta.requiresAdmin;
   const user = JSON.parse(localStorage.getItem("user"));
-  if (requiresAuth && !user) {
-    next("/auth-login"); // Redirect to login if not authenticated
-  } else if (requiresAdmin && (!user || user.role !== "admin")) {
-    next("/dashboard"); // Redirect non-admin users to dashboard
+  if (to.meta.requiresAuth && !user) {
+    next("/auth-login");
+  } else if (to.meta.requiresAdmin && user.role !== "admin") {
+    next("/dashboard");
   } else {
-    next(); // Allow navigation
+    next();
   }
 });
 

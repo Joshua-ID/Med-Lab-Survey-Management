@@ -23,7 +23,7 @@
       <Button
         :loading="loading"
         type="submit"
-        label="Login"
+        label="Register"
         class="auth-button"
         @click="register"
       />
