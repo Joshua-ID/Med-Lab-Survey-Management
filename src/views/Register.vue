@@ -91,7 +91,6 @@ export default {
           life: 10000,
         });
         this.loading = false;
-        this.loading = false;
       }
     },
   },

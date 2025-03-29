@@ -1,12 +1,17 @@
 <template>
-  <div class="not-found">
-    <h1>404</h1>
-    <p>Oops! The page you are looking for does not exist.</p>
-    <router-link to="/">
-      <span class="back-to-home">
-        <i class="fa-solid fa-arrow-left"></i> Go back to Home
-      </span>
-    </router-link>
+  <div class="not-found-container">
+    <div class="left-wrapper">
+      <img src="../assets/svgs/not-found-icon.png" />
+      <h1>404</h1>
+    </div>
+    <div class="right-wrapper">
+      <h1>Oops! The page you are looking for does not exist.</h1>
+      <router-link to="/">
+        <span class="back-to-home">
+          <i class="pi pi-arrow-left"></i> Go back to Home
+        </span>
+      </router-link>
+    </div>
   </div>
 </template>
 
@@ -17,14 +22,17 @@ export default {
 </script>
 
 <style scoped>
-.not-found {
-  padding: 2rem;
+.not-found-container {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
+
+  padding: 2rem;
   align-items: center;
-  flex-direction: column;
-  height: 80vh;
+  height: 100vh;
   width: 100%;
+  gap: 2rem;
+  max-width: 768px;
+  margin: 0 auto;
   text-align: center;
 
   @media (max-width: 650px) {
