@@ -17,9 +17,9 @@
         <h3>Blood group: {{ doctor.bloodGroup }}</h3>
         <p>
           <strong>Occupation:</strong>
-          {{ doctor.occupation || "Medical doctor" }}
+          {{ doctor.occupation }}
         </p>
-        <p><strong>Height:</strong> {{ doctor.height || "Medical doctor" }}</p>
+        <p><strong>Height:</strong> {{ doctor.height }}</p>
         <p>
           <strong>Location:</strong> {{ doctor.address.city }}, city:
           {{ doctor.address.address }}
@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import { fetchStaff } from "../utils/fetchDataStore";
+import { fetchStaffDummy, fetchStaffRandom } from "../utils/fetchDataStore";
 
 export default {
   data() {
@@ -41,7 +41,7 @@ export default {
   },
   async mounted() {
     try {
-      this.doctorList = await fetchStaff(10);
+      this.doctorList = await fetchStaffDummy(20);
     } catch (error) {
       console.error("Failed to fetch doctors:", error);
     } finally {

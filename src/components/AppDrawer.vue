@@ -8,17 +8,17 @@
       <ul>
         <li class="list-item">
           <a class="item">
-            <i class="pi pi-users mr-2"></i>
-            <span @click="viewStaff" class="font-medium">All Staffs</span>
+            <i class="pi pi-users"></i>
+            <span @click="viewStaff" class="font-medium">Staff Members</span>
+          </a>
+        </li>
+        <li class="list-item">
+          <a class="item">
+            <i class="pi pi-user"></i>
+            <span @click="viewDoctor" class="font-medium">Medical Staff</span>
           </a>
         </li>
       </ul>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat.
-      </p>
 
       <LogoutButton />
     </div>
@@ -41,6 +41,9 @@ export default {
   methods: {
     viewStaff() {
       this.$router.push("view-staff");
+    },
+    viewDoctor() {
+      this.$router.push("view-doctor");
     },
   },
 };

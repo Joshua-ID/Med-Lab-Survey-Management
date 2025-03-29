@@ -7,12 +7,22 @@
 
       <div class="confirm-logout-btn">
         <Button
+          class="action-btn"
           type="button"
           label="No"
           severity="secondary"
+          raised
+          variant="outlined"
           @click="visible = false"
         ></Button>
-        <Button type="button" label="Yes" @click="logout" />
+        <Button
+          class="action-btn"
+          severity="danger"
+          type="button"
+          raised
+          label="Yes"
+          @click="logout"
+        />
       </div>
     </div>
   </Dialog>
@@ -31,6 +41,7 @@ export default {
   },
   methods: {
     async logout() {
+      this.visible = false;
       await signOut(auth);
       localStorage.clear();
       this.$router.push("/auth-login");
@@ -49,6 +60,10 @@ export default {
     gap: 3rem;
     justify-content: center;
     align-items: center;
+
+    .action-btn {
+      width: 120px;
+    }
   }
 }
 </style>

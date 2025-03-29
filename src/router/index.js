@@ -7,6 +7,7 @@ import Dashboard from "../views/Dashboard.vue";
 import AdminPanel from "../views/AdminPanel.vue";
 import NotFoundPage from "../views/NotFoundPage.vue";
 import StaffUsers from "../views/StaffUsers.vue";
+import DoctorStaff from "../views/DoctorsStaff.vue";
 
 const routes = [
   { path: "/", redirect: "/auth-login" },
@@ -27,6 +28,10 @@ const routes = [
   {
     path: "/view-staff",
     component: StaffUsers,
+  },
+  {
+    path: "/view-doctor",
+    component: DoctorStaff,
   },
 
   {

@@ -7,17 +7,16 @@
 
     <div v-else class="grid">
       <div v-for="(staff, index) in staffList" :key="index" class="staff-card">
-        <img :src="staff.image" alt="Staff Photo" class="staff-img" />
-        <h3>{{ staff.firstName }} {{ staff.lastName }}</h3>
-        <h3>age: {{ staff.age }}</h3>
-        <h3>Blood group: {{ staff.bloodGroup }}</h3>
+        <img :src="staff.picture.medium" alt="Staff Photo" class="staff-img" />
+        <h3>{{ staff.name.first }} {{ staff.name.last }}</h3>
+        <h3>age: {{ staff.dob.age }}</h3>
+        <h3>age: {{ staff.dob.date }}</h3>
+        <h3>Email: {{ staff.email }}</h3>
+        <p><strong>Phone:</strong> {{ staff.phone }}</p>
+        <p><strong>Gender:</strong> {{ staff.gender }}</p>
         <p>
-          <strong>Occupation:</strong> {{ staff.occupation || "Medical Staff" }}
-        </p>
-        <p><strong>Height:</strong> {{ staff.height || "Medical Staff" }}</p>
-        <p>
-          <strong>Location:</strong> {{ staff.address.city }}, city:
-          {{ staff.address.address }}
+          <strong>Location:</strong> {{ staff.location.city }}, Country:
+          {{ staff.location.country }}
         </p>
       </div>
     </div>
@@ -25,7 +24,7 @@
 </template>
 
 <script>
-import { fetchStaff } from "../utils/fetchDataStore";
+import { fetchStaffRandom } from "../utils/fetchDataStore";
 
 export default {
   data() {
@@ -36,7 +35,7 @@ export default {
   },
   async mounted() {
     try {
-      this.staffList = await fetchStaff(10);
+      this.staffList = await fetchStaffRandom(50);
     } catch (error) {
       console.error("Failed to fetch staff data:", error);
     } finally {
