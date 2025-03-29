@@ -1,15 +1,14 @@
-<!-- src/views/AdminPanel.vue -->
 <template>
-  <div class="admin-panel">
-    <h2>Admin Panel</h2>
-    <p>Manage hospital users, doctors, and appointments here.</p>
+  <div class="admin-panel-dashboard">
+    <AppScreen />
   </div>
 </template>
 
 <script>
+import AppScreen from "./AppScreen.vue";
+
 export default {
-  setup() {
-    return {};
-  },
+  name: "AdminPanel",
+  components: { AppScreen },
 };
 </script>

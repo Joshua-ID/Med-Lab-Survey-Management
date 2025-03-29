@@ -6,6 +6,7 @@ import Register from "../views/Register.vue";
 import Dashboard from "../views/Dashboard.vue";
 import AdminPanel from "../views/AdminPanel.vue";
 import NotFoundPage from "../views/NotFoundPage.vue";
+import StaffUsers from "../views/StaffUsers.vue";
 
 const routes = [
   { path: "/", redirect: "/auth-login" },
@@ -22,6 +23,10 @@ const routes = [
   {
     path: "/admin",
     component: AdminPanel,
+  },
+  {
+    path: "/view-staff",
+    component: StaffUsers,
   },
 
   {

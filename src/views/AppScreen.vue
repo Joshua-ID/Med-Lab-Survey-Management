@@ -1,6 +1,7 @@
 <template>
   <div class="app-screen">
     <HeaderNavigator />
+    <slot name="appPage"></slot>
   </div>
 </template>
 
