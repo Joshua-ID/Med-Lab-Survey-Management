@@ -9,25 +9,31 @@
         <li class="list-item">
           <a class="item">
             <i class="pi pi-objects-column"></i>
-            <span @click="" class="font-medium">Overview</span>
+            <span @click="">Overview</span>
           </a>
         </li>
         <li class="list-item">
           <a class="item">
             <i class="pi pi-users"></i>
-            <span @click="viewStaff" class="font-medium">Staff Members</span>
+            <span @click="viewStaff">Staff Members</span>
           </a>
         </li>
         <li class="list-item">
           <a class="item">
             <i class="pi pi-user"></i>
-            <span @click="viewDoctor" class="font-medium">Medical Staff</span>
+            <span @click="viewDoctor">Medical Staff</span>
           </a>
         </li>
         <li class="list-item">
           <a class="item">
             <i class="pi pi-chart-line"></i>
-            <span @click="" class="font-medium">Monitoring</span>
+            <span @click="">Monitoring</span>
+          </a>
+        </li>
+        <li class="list-item">
+          <a class="item">
+            <i class="pi pi-warehouse"></i>
+            <span @click="viewAccount">User Account</span>
           </a>
         </li>
       </ul>
@@ -56,6 +62,9 @@ export default {
     },
     viewDoctor() {
       this.$router.push("view-doctor");
+    },
+    viewAccount() {
+      this.$router.push("admin-users");
     },
   },
 };

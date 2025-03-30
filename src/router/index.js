@@ -27,11 +27,11 @@ const routes = [
   },
   {
     path: "/view-staff",
-    component: StaffUsers,
+    component: () => import("../views/StaffUsers.vue"),
   },
   {
     path: "/view-doctor",
-    component: DoctorStaff,
+    component: () => import("../views/DoctorsView.vue"),
   },
 
   {

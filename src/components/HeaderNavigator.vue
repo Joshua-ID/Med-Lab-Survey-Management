@@ -2,10 +2,7 @@
   <div class="header-container">
     <AppDrawer />
     <div class="avatar-and-theme">
-      <Avatar
-        image="https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png"
-        shape="circle"
-      />
+      <Avatar image="/public/defualt-user-icon.png" shape="circle" />
 
       <LogoutButton />
       <ToggleMoodComponent />

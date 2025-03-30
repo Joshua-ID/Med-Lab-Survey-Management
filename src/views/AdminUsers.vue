@@ -1,14 +1,10 @@
 <template>
-  <div class="admin-users">
+  <div class="admin-users-container">
     <h2>User Management</h2>
     <DataTable :value="users" paginator :rows="10" responsiveLayout="scroll">
       <Column field="photoURL" header="Photo">
         <template #body="slotProps">
-          <Avatar
-            :image="slotProps.data.photoURL"
-            shape="circle"
-            size="large"
-          />
+          <img class="image" :src="slotProps.data.photoURL" />
         </template>
       </Column>
       <Column field="name" header="Name"></Column>
@@ -77,11 +73,10 @@ import {
 } from "firebase/firestore";
 import { Column, DataTable, Dialog } from "primevue";
 import { useToast } from "primevue/usetoast";
-import AppScreen from "./AppScreen.vue";
 
 export default {
   name: "AdminUsers",
-  components: { Column, DataTable, Dialog, AppScreen },
+  components: { Column, DataTable, Dialog },
   data() {
     return {
       users: [],
@@ -162,7 +157,15 @@ export default {
 </script>
 
 <style scoped>
-.admin-users {
-  padding: 20px;
+.admin-users-container {
+  padding: 2rem;
+
+  .image {
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    border: 2px solid var(--st-surface-sleek);
+    object-fit: cover;
+  }
 }
 </style>
