@@ -7,7 +7,7 @@ import Dashboard from "../views/Dashboard.vue";
 import AdminPanel from "../views/AdminPanel.vue";
 import NotFoundPage from "../views/NotFoundPage.vue";
 import StaffUsers from "../views/StaffUsers.vue";
-import DoctorStaff from "../views/DoctorsStaff.vue";
+import DoctorStaff from "../views/DoctorsView.vue";
 
 const routes = [
   { path: "/", redirect: "/auth-login" },

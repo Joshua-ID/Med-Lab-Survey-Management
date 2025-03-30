@@ -1,17 +1,17 @@
 <template>
-  <div class="staff-view-container">
-    <h2>Staff Sector</h2>
+  <div class="doctor-view-container">
+    <h2>Our Doctors</h2>
     <div class="grid">
-      <div v-for="(staff, index) in staffList" :key="index">
+      <div v-for="(doctor, index) in doctorList" :key="index">
         <UserCardComponent
-          :image="staff.picture?.medium"
-          :age="staff.dob?.age"
-          :gender="staff.gender"
-          :first-name="staff.name?.first"
-          :last-name="staff.name?.last"
-          :country="staff.location?.country"
-          :city="staff.location?.city"
-          :phone="staff?.phone"
+          :image="doctor.picture?.medium"
+          :age="doctor.dob?.age"
+          :gender="doctor.gender"
+          :first-name="doctor.name?.first"
+          :last-name="doctor.name?.last"
+          :country="doctor.location?.country"
+          :city="doctor.location?.city"
+          :phone="doctor?.phone"
           :loading="isLoading"
         />
       </div>
@@ -24,23 +24,23 @@ import UserCardComponent from "../components/userCardComponent.vue";
 import { fetchStaffRandom } from "../utils/fetchDataStore";
 
 export default {
-  name: "StaffUsers",
+  name: "DoctorsView",
   components: { UserCardComponent },
   data() {
     return {
-      staffList: Array(20).fill({}),
+      doctorList: Array(18).fill({}),
       isLoading: true,
     };
   },
 
   async mounted() {
     try {
-      await new Promise((resolve) => setTimeout(resolve, 100));
+      await new Promise((resolve) => setTimeout(resolve, 500));
 
-      const staffs = await fetchStaffRandom(60);
-      this.staffList = staffs;
+      const doctors = await fetchStaffRandom(30);
+      this.doctorList = doctors;
     } catch (error) {
-      console.error("Failed to fetch staffs:", error);
+      console.error("Failed to fetch doctors:", error);
     } finally {
       this.isLoading = false;
     }
@@ -49,7 +49,7 @@ export default {
 </script>
 
 <style scoped>
-.staff-view-container {
+.doctor-view-container {
   padding: 2rem;
   display: flex;
   flex-direction: column;

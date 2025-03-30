@@ -15,7 +15,6 @@ import {
   ToastService,
   Dialog,
 } from "primevue";
-
 const app = createApp(App);
 
 const MyPreset = definePreset(Aura, {

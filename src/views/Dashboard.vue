@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import DoctorsStaff from "./DoctorsStaff.vue";
+import DoctorsStaff from "./DoctorsView.vue";
 import PatientControl from "./PatientControl.vue";
 import StaffUsers from "../views/StaffUsers.vue";
 

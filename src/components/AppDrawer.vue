@@ -8,6 +8,12 @@
       <ul>
         <li class="list-item">
           <a class="item">
+            <i class="pi pi-objects-column"></i>
+            <span @click="" class="font-medium">Overview</span>
+          </a>
+        </li>
+        <li class="list-item">
+          <a class="item">
             <i class="pi pi-users"></i>
             <span @click="viewStaff" class="font-medium">Staff Members</span>
           </a>
@@ -16,6 +22,12 @@
           <a class="item">
             <i class="pi pi-user"></i>
             <span @click="viewDoctor" class="font-medium">Medical Staff</span>
+          </a>
+        </li>
+        <li class="list-item">
+          <a class="item">
+            <i class="pi pi-chart-line"></i>
+            <span @click="" class="font-medium">Monitoring</span>
           </a>
         </li>
       </ul>
