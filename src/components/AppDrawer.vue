@@ -5,38 +5,35 @@
     header="Med Lab Survery"
   >
     <div class="drawer-content">
-      <ul>
-        <li class="list-item">
-          <a class="item">
-            <i class="pi pi-objects-column"></i>
-            <span @click="">Overview</span>
-          </a>
-        </li>
-        <li class="list-item">
-          <a class="item">
-            <i class="pi pi-users"></i>
-            <span @click="viewStaff">Staff Members</span>
-          </a>
-        </li>
-        <li class="list-item">
-          <a class="item">
-            <i class="pi pi-user"></i>
-            <span @click="viewDoctor">Medical Staff</span>
-          </a>
-        </li>
-        <li class="list-item">
-          <a class="item">
-            <i class="pi pi-chart-line"></i>
-            <span @click="">Monitoring</span>
-          </a>
-        </li>
-        <li class="list-item">
-          <a class="item">
-            <i class="pi pi-warehouse"></i>
-            <span @click="viewAccount">User Account</span>
-          </a>
-        </li>
-      </ul>
+      <div class="list-item">
+        <router-link
+          :to="{ path: userRole ? 'admin' : 'dashboard' }"
+          class="item"
+        >
+          <i class="pi pi-objects-column"></i>
+          <span @click="dashboard">Overview</span>
+        </router-link>
+        <router-link :to="{ path: 'patient' }" class="item">
+          <i class="pi pi-truck"></i>
+          <span @click="addPatient">Patient</span>
+        </router-link>
+        <router-link :to="{ path: 'view-staff' }" class="item">
+          <i class="pi pi-users"></i>
+          <span @click="viewStaff">Staff Members</span>
+        </router-link>
+        <router-link :to="{ path: 'view-doctor' }" class="item">
+          <i class="pi pi-user"></i>
+          <span>Medical Staff</span>
+        </router-link>
+        <router-link :to="{ path: '' }" class="item">
+          <i class="pi pi-chart-line"></i>
+          <span @click="">Monitoring</span>
+        </router-link>
+        <router-link :to="{ path: 'admin-users' }" class="item">
+          <i class="pi pi-warehouse"></i>
+          <span>User Account</span>
+        </router-link>
+      </div>
 
       <LogoutButton />
     </div>
@@ -47,6 +44,7 @@
 <script>
 import { Drawer } from "primevue";
 import LogoutButton from "./LogoutButton.vue";
+import { RouterLink } from "vue-router";
 
 export default {
   name: "AppDrawer",
@@ -56,15 +54,10 @@ export default {
       visible: true,
     };
   },
-  methods: {
-    viewStaff() {
-      this.$router.push("view-staff");
-    },
-    viewDoctor() {
-      this.$router.push("view-doctor");
-    },
-    viewAccount() {
-      this.$router.push("admin-users");
+  computed: {
+    userRole() {
+      const user = JSON.parse(localStorage.getItem("user"));
+      return user ? user.role : null;
     },
   },
 };
@@ -75,8 +68,8 @@ export default {
   padding: 0;
   outline: 0;
 
-  background-color: var(--st-surface-background) !important;
-  color: var(--st-surface-text) !important;
+  /* background-color: var(--st-surface-background) !important;
+  color: var(--st-surface-text) !important; */
 }
 
 .drawer-content {
@@ -86,20 +79,21 @@ export default {
   flex-direction: column;
   height: 100%;
 
-  ul {
-    .list-item {
+  .list-item {
+    display: flex;
+    flex-direction: column;
+
+    .item {
+      display: flex;
+      gap: 10px;
       padding: 1rem;
       border-radius: 15px;
-      list-style: none;
       cursor: pointer;
+      text-decoration: none;
+      color: var(--st-surface-text);
 
       &:hover {
         background-color: aliceblue;
-      }
-
-      .item {
-        display: flex;
-        gap: 1rem;
       }
     }
   }

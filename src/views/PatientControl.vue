@@ -2,8 +2,10 @@
   <div class="patient-container">
     <h2>Patient List</h2>
 
-    <!-- Add Patient Button -->
-    <button @click="showModal = true" class="add-button">Add Patient</button>
+    <!-- Add Patient Button (Only for Non-Admin Users) -->
+    <button v-if="!isAdmin" @click="showModal = true" class="add-button">
+      Add Patient
+    </button>
 
     <!-- Table -->
     <DataTable
@@ -78,7 +80,13 @@ export default {
         phone: "",
         createdAt: "",
       },
+      user: null,
     };
+  },
+  computed: {
+    isAdmin() {
+      return this.user?.role === "admin";
+    },
   },
   methods: {
     async addPatient() {
@@ -108,6 +116,12 @@ export default {
     },
   },
   mounted() {
+    // Fetch user from localStorage
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) {
+      this.user = JSON.parse(storedUser);
+    }
+
     const patientsRef = collection(db, "patients");
 
     onSnapshot(patientsRef, (snapshot) => {
@@ -122,7 +136,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<!-- <style >
 .patient-container {
   padding: 20px;
   text-align: center;
@@ -170,5 +184,14 @@ export default {
   color: white;
   padding: 8px 15px;
   cursor: pointer;
+}
+</style> -->
+
+<style>
+.patient-container {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
 }
 </style>

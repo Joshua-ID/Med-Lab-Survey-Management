@@ -1,9 +1,5 @@
 <template>
-  <!-- <StaffUsers />
-      <DoctorsStaff /> -->
-  <!-- <PatientControl /> -->
-
-  <div class="user-dashboard-container">DASHBOARD</div>
+  <div class="user-dashboard-container">DASHBOARD USER</div>
 </template>
 
 <script>

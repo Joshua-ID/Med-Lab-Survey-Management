@@ -6,16 +6,14 @@ import Register from "../views/Register.vue";
 import Dashboard from "../views/Dashboard.vue";
 import AdminPanel from "../views/AdminPanel.vue";
 import NotFoundPage from "../views/NotFoundPage.vue";
-import StaffUsers from "../views/StaffUsers.vue";
-import DoctorStaff from "../views/DoctorsView.vue";
 
 const routes = [
+  // login
   { path: "/", redirect: "/auth-login" },
-
   { path: "/auth-login", component: Login },
-
   { path: "/register", component: Register },
 
+  // dashboard
   {
     path: "/dashboard",
     component: Dashboard,
@@ -25,6 +23,12 @@ const routes = [
     path: "/admin",
     component: AdminPanel,
   },
+
+  // pages
+  {
+    path: "/patient",
+    component: () => import("../views/PatientControl.vue"),
+  },
   {
     path: "/view-staff",
     component: () => import("../views/StaffUsers.vue"),
@@ -33,7 +37,6 @@ const routes = [
     path: "/view-doctor",
     component: () => import("../views/DoctorsView.vue"),
   },
-
   {
     path: "/admin-users",
     component: () => import("../views/AdminUsers.vue"),
