@@ -15,9 +15,15 @@
   --dark: #131b23;
 }
 
+.dark {
+  background-color: var(--primary-color);
+  color: var(--white);
+}
+
 body {
   font-size: 16px;
   font-family: "Rubik", sans-serif;
+  color: var(--text-color);
 
   .auth-container {
     display: flex;

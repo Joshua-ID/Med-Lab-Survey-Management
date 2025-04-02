@@ -27,6 +27,7 @@ const MyPreset = definePreset(Aura, {
           text: "#141B41",
           sleek: "#918EF4",
           standard: "{violet.700}",
+          card: "{slate.200}",
         },
       },
       dark: {
@@ -36,6 +37,7 @@ const MyPreset = definePreset(Aura, {
           text: "{slate.300}",
           sleek: "#918EF4",
           standard: "{violet.700}",
+          card: "{violet.900}",
         },
       },
     },

@@ -3,21 +3,21 @@
     <div class="auth-form">
       <h2>Login</h2>
       <div class="auth-card">
-        <InputText
-          v-model="email"
-          size="large"
-          placeholder="Enter your email"
-          class="input-field"
-          variant="filled"
-        />
+        <FloatLabel variant="on">
+          <InputText id="email" v-model="email" size="large" variant="filled" />
+          <label for="email">Email</label>
+        </FloatLabel>
 
-        <Password
-          size="large"
-          placeholder="Enter your password"
-          variant="filled"
-          v-model="password"
-          toggleMask
-        />
+        <FloatLabel variant="on">
+          <Password
+            id="password"
+            size="large"
+            variant="filled"
+            v-model="password"
+            toggleMask
+          />
+          <label for="password">Password</label>
+        </FloatLabel>
       </div>
       <Button
         :loading="loading"
@@ -38,10 +38,10 @@
 import { auth, db } from "../firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
-import { useToast } from "primevue";
+import { FloatLabel, useToast } from "primevue";
 
 export default {
-  components: { useToast },
+  components: { useToast, FloatLabel },
   setup() {
     const toast = useToast();
     return { toast };
@@ -66,14 +66,23 @@ export default {
         const userRef = doc(db, "users", user.uid);
         const userSnap = await getDoc(userRef);
 
+        const successMessage = this.toast.add({
+          severity: "success",
+          summary: "Successful Login",
+          detail: "Login",
+          life: 10000,
+        });
+
         if (userSnap.exists()) {
           const userData = userSnap.data();
           localStorage.setItem("user", JSON.stringify(userData));
 
           if (userData.role === "admin") {
             this.$router.push("/admin");
+            successMessage;
           } else {
             this.$router.push("/dashboard");
+            successMessage;
           }
         } else {
           this.toast.add({
@@ -91,15 +100,15 @@ export default {
           life: 3000,
         });
       } finally {
-        this.toast.add({
-          severity: "success",
-          summary: "Successful Login",
-          detail: "Login",
-          life: 10000,
-        });
         this.loading = false;
+        return;
       }
     },
   },
 };
 </script>
+<style>
+.p-inputtext {
+  width: 100%;
+}
+</style>

@@ -74,6 +74,9 @@ export default {
   border: none;
   padding: 0;
   outline: 0;
+
+  background-color: var(--st-surface-background) !important;
+  color: var(--st-surface-text) !important;
 }
 
 .drawer-content {

@@ -3,22 +3,24 @@
     <div class="auth-form">
       <h2>Register</h2>
       <div class="auth-card">
-        <InputText
-          v-model="email"
-          size="large"
-          placeholder="Enter your email"
-          variant="filled"
-        />
+        <FloatLabel variant="on">
+          <InputText id="email" v-model="email" size="large" variant="filled" />
 
-        <Password
-          size="large"
-          placeholder="Enter your password"
-          variant="filled"
-          v-model="password"
-          promptLabel="Choose a password"
-          strongLabel="Strong password"
-          toggleMask
-        />
+          <label for="email">Email</label>
+        </FloatLabel>
+
+        <FloatLabel variant="on">
+          <Password
+            id="password"
+            size="large"
+            variant="filled"
+            v-model="password"
+            promptLabel="Choose a password"
+            strongLabel="Strong password"
+            toggleMask
+          />
+          <label for="password">Password</label>
+        </FloatLabel>
       </div>
       <Button
         :loading="loading"
@@ -39,11 +41,11 @@
 import { auth, db } from "../firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
-import { useToast } from "primevue";
+import { FloatLabel, useToast } from "primevue";
 
 export default {
   name: "Register",
-  components: { useToast },
+  components: { useToast, FloatLabel },
   setup() {
     const toast = useToast();
     return { toast };
@@ -76,6 +78,12 @@ export default {
           JSON.stringify({ email: user.email, role: "user" })
         );
         this.$router.push("/dashboard");
+        this.toast.add({
+          severity: "success",
+          summary: "Registration Successful",
+          detail: "Login",
+          life: 10000,
+        });
       } catch (error) {
         this.toast.add({
           severity: "error",
@@ -84,20 +92,15 @@ export default {
           life: 3000,
         });
       } finally {
-        this.toast.add({
-          severity: "success",
-          summary: "Registration Successful",
-          detail: "Login",
-          life: 10000,
-        });
         this.loading = false;
+        return;
       }
     },
   },
 };
 </script>
 <style>
-.password-input {
+.p-inputtext {
   width: 100%;
 }
 </style>

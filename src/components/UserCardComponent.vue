@@ -71,7 +71,7 @@ export default {
 <style>
 .user-card-container {
   width: 100%;
-  background-color: #fff;
+  background-color: var(--st-surface-card);
   box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
   border-radius: 12px;
   padding: 10px 15px;
