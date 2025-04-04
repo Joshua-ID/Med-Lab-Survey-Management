@@ -44,14 +44,13 @@
 <script>
 import { Drawer } from "primevue";
 import LogoutButton from "./LogoutButton.vue";
-import { RouterLink } from "vue-router";
 
 export default {
   name: "AppDrawer",
   components: { Drawer, LogoutButton },
   data() {
     return {
-      visible: true,
+      visible: false,
     };
   },
   computed: {

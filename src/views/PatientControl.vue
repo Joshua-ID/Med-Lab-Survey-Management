@@ -2,83 +2,196 @@
   <div class="patient-container">
     <h2>Patient List</h2>
 
-    <!-- Add Patient Button (Only for Non-Admin Users) -->
-    <button v-if="!isAdmin" @click="showModal = true" class="add-button">
-      Add Patient
-    </button>
-
     <!-- Table -->
     <DataTable
       :value="patients"
-      :loading="loading"
+      stripedRows
       responsiveLayout="scroll"
-      class="patient-table"
+      paginator
+      :rows="10"
+      :rowsPerPageOptions="[5, 10, 20, 50]"
+      removableSort
+      v-model:filters="filters"
+      filterDisplay="row"
+      :globalFilterFields="['name', 'guardian', 'address', 'phone']"
+      class="table-data"
     >
-      <Column field="name" header="Name"></Column>
-      <Column field="gender" header="Gender"></Column>
-      <Column field="guardian" header="Guardian"></Column>
-      <Column field="address" header="Address"></Column>
-      <Column field="phone" header="Phone"></Column>
-      <Column field="createdAt" header="Created At"></Column>
+      <template #header>
+        <div class="table-action-wrapper">
+          <Button
+            v-if="!isAdmin"
+            @click="isModalVisible = true"
+            class="add-button"
+          >
+            Add Patient
+          </Button>
+
+          <InputText
+            v-model="filters['global'].value"
+            placeholder="Search Patients..."
+            class="filter-input"
+          />
+        </div>
+      </template>
+      <Column field="name" header="Full Name" />
+      <Column field="address" header="Address" />
+      <Column field="guardian" header="Guardian" />
+      <Column field="gender" header="Gender" sortable />
+      <Column field="phone" header="Phone" />
+      <Column field="bookAppointment" header="Book Appointment" />
+      <Column field="createdAt" header="Created At" sortable />
+
+      <template #empty>
+        <div class="table-empty-state">
+          <img
+            class="empty-state-icon"
+            src="../assets/svgs/table-empty-state.png"
+          />
+          <label class="empty-state-text">No table data</label>
+        </div>
+      </template>
     </DataTable>
 
     <!-- Patient Form Modal -->
-    <div v-if="showModal" class="modal">
-      <div class="modal-content">
-        <h3>Add New Patient</h3>
-
-        <label>Name:</label>
-        <input v-model="newPatient.name" type="text" />
-
-        <label>Gender:</label>
-        <select v-model="newPatient.gender">
-          <option value="Male">Male</option>
-          <option value="Female">Female</option>
-        </select>
-
-        <label>Guardian:</label>
-        <input v-model="newPatient.guardian" type="text" />
-
-        <label>Address:</label>
-        <input v-model="newPatient.address" type="text" />
-
-        <label>Phone:</label>
-        <input v-model="newPatient.phone" type="text" />
-
-        <div class="modal-actions">
-          <button @click="addPatient" class="save-button">Save</button>
-          <button @click="showModal = false" class="close-button">
-            Cancel
-          </button>
-        </div>
+    <Dialog
+      class="add-patient-modal"
+      v-model:visible="isModalVisible"
+      modal
+      header="Book Appointment"
+    >
+      <span> Book a schedule with out medical staff </span>
+      <div class="body-content">
+        <FloatLabel class="input-field" variant="on">
+          <label for="name">Full Name</label>
+          <InputText v-model="newPatient.name" id="name" autocomplete="off" />
+        </FloatLabel>
+        <FloatLabel class="input-field" variant="on">
+          <label for="address">Address</label>
+          <InputText
+            v-model="newPatient.address"
+            id="address"
+            autocomplete="off"
+          />
+        </FloatLabel>
       </div>
-    </div>
+      <div class="grid-style">
+        <FloatLabel class="input-field" variant="on">
+          <Select
+            id="gender"
+            v-model="newPatient.gender"
+            :options="genderOptions"
+            optionLabel="name"
+            checkmark
+            :highlightOnSelect="false"
+          />
+          <label for="gender">Select Gender</label>
+        </FloatLabel>
+        <FloatLabel class="input-field" variant="on">
+          <label for="phone">Phone Number</label>
+          <InputText v-model="newPatient.phone" id="phone" autocomplete="on" />
+        </FloatLabel>
+        <FloatLabel class="input-field" variant="on">
+          <Select
+            id="guardian"
+            v-model="newPatient.guardian"
+            :options="guardianOptions"
+            optionLabel="name"
+            checkmark
+            :highlightOnSelect="false"
+          />
+          <label for="guardian">Guardian</label>
+        </FloatLabel>
+        <FloatLabel variant="on" class="input-field">
+          <DatePicker
+            id="book_date"
+            dateFormat="D-M-y"
+            v-model="newPatient.bookAppointment"
+            showTime
+            hourFormat="12"
+            showIcon
+            iconDisplay="input"
+            fluid
+            showButtonBar
+            :manualInput="false"
+            :minDate="minDate"
+          />
+          <label for="book_date">Book Appointment Date</label>
+        </FloatLabel>
+      </div>
+      <template #footer>
+        <Button
+          type="button"
+          label="Cancel"
+          severity="secondary"
+          @click="isModalVisible = false"
+        ></Button>
+        <Button
+          :loading="isLoading"
+          type="button"
+          label="Save"
+          @click="addPatient"
+        ></Button>
+      </template>
+    </Dialog>
   </div>
 </template>
 
 <script>
 import { collection, onSnapshot } from "firebase/firestore";
 import { db, addPatientToFirestore } from "../firebase";
-import DataTable from "primevue/datatable";
-import Column from "primevue/column";
+import {
+  Select,
+  FloatLabel,
+  Column,
+  DataTable,
+  Toast,
+  DatePicker,
+  ProgressSpinner,
+} from "primevue";
 
 export default {
   components: {
     DataTable,
     Column,
+    Select,
+    FloatLabel,
+    Toast,
+    DatePicker,
+    ProgressSpinner,
   },
   data() {
     return {
+      isLoading: false,
       patients: [],
-      showModal: false,
-      loading: true,
+      isModalVisible: false,
+      isLoadingTable: false,
       newPatient: {
         name: "",
-        gender: "Male",
-        guardian: "",
+        gender: null,
+        guardian: null,
         address: "",
         phone: "",
+        bookAppointment: "",
         createdAt: "",
+      },
+      genderOptions: [
+        { name: "Male", value: 1 },
+        { name: "Female", value: 2 },
+      ],
+      guardianOptions: [
+        { name: "Parent", value: 1 },
+        { name: "Neighbour", value: 2 },
+        { name: "Self", value: 3 },
+        { name: "Siblings", value: 4 },
+      ],
+
+      filters: {
+        global: { value: null, matchMode: "contains" },
+        name: { value: null, matchMode: "contains" },
+        gender: { value: null, matchMode: "equals" },
+        guardian: { value: null, matchMode: "contains" },
+        address: { value: null, matchMode: "contains" },
+        phone: { value: null, matchMode: "contains" },
       },
       user: null,
     };
@@ -90,29 +203,76 @@ export default {
   },
   methods: {
     async addPatient() {
-      if (!this.newPatient.name || !this.newPatient.phone) {
-        alert("Please fill in required fields!");
+      if (
+        !this.newPatient.name ||
+        !this.newPatient.phone ||
+        !this.newPatient.phone ||
+        !this.newPatient.gender ||
+        !this.newPatient.address ||
+        !this.newPatient.bookAppointment
+      ) {
+        this.$toast.add({
+          severity: "error",
+          summary: "Empty Fields",
+          details: "Please fill in required fields!",
+          life: 3000,
+        });
         return;
       }
 
-      this.newPatient.createdAt = new Date().toLocaleString();
+      if (this.newPatient.bookAppointment instanceof Date) {
+        this.newPatient.bookAppointment = this.newPatient.bookAppointment =
+          this.newPatient.bookAppointment.toLocaleDateString("en-US", {
+            weekday: "long",
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+            hour: "numeric",
+            minute: "numeric",
+            second: "numeric",
+            hour12: true,
+          });
+      }
+
+      const patientData = {
+        ...this.newPatient,
+        gender: this.newPatient.gender.name,
+        guardian: this.newPatient.guardian.name,
+
+        createdAt: new Date().toLocaleString(),
+      };
 
       try {
-        await addPatientToFirestore(this.newPatient);
+        this.isLoading = true;
+        await addPatientToFirestore(patientData);
       } catch (error) {
         console.error("Error adding patient:", error);
+        this.$toast.add({
+          severity: "error",
+          detail: "Fail to Book Appointment",
+          summary:
+            "Error persist! Refresh and try again. If error Persist contact the Developer ",
+        });
+      } finally {
+        this.isLoading = false;
       }
 
       // Clear form and close modal
       this.newPatient = {
         name: "",
-        gender: "Male",
+        gender: "",
         guardian: "",
         address: "",
         phone: "",
+        bookAppointment: "",
         createdAt: "",
       };
-      this.showModal = false;
+      this.isModalVisible = false;
+      this.$toast.add({
+        severity: "success",
+        detail: "Your form is been booked successfully",
+        summary: "Appointment Booked",
+      });
     },
   },
   mounted() {
@@ -129,63 +289,15 @@ export default {
         id: doc.id,
         ...doc.data(),
       }));
-      this.loading = false;
       console.log("Fetched Patients:", this.patients);
     });
   },
+
+  created() {
+    this.minDate = new Date();
+  },
 };
 </script>
-
-<!-- <style >
-.patient-container {
-  padding: 20px;
-  text-align: center;
-}
-.add-button {
-  padding: 8px 15px;
-  background: green;
-  color: white;
-  border: none;
-  cursor: pointer;
-  margin-bottom: 10px;
-}
-.patient-table {
-  width: 100%;
-  margin-top: 10px;
-}
-.modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.modal-content {
-  background: white;
-  padding: 20px;
-  border-radius: 5px;
-}
-.modal-actions {
-  display: flex;
-  justify-content: space-between;
-}
-.save-button {
-  background: blue;
-  color: white;
-  padding: 8px 15px;
-  cursor: pointer;
-}
-.close-button {
-  background: red;
-  color: white;
-  padding: 8px 15px;
-  cursor: pointer;
-}
-</style> -->
 
 <style>
 .patient-container {
@@ -193,5 +305,73 @@ export default {
   display: flex;
   flex-direction: column;
   gap: 2rem;
+}
+
+.table-data {
+  .table-action-wrapper {
+    display: flex;
+    gap: 1rem;
+    justify-self: end;
+
+    .filter-input {
+      width: 400px !important;
+
+      @media (max-device-width: 768px) {
+        width: auto;
+      }
+    }
+
+    .add-button {
+      white-space: nowrap;
+      padding: 10px 2rem !important;
+    }
+  }
+
+  .table-empty-state {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    /* height: 320px; */
+
+    .empty-state-icon {
+      width: 250px;
+      height: 250px;
+      height: auto;
+    }
+
+    .empty-state-text {
+      font-weight: bold;
+    }
+  }
+}
+
+.add-patient-modal {
+  .body-content {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .input-field {
+    width: 100%;
+  }
+
+  .p-dialog-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .grid-style {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+    gap: 1rem;
+
+    .p-select {
+      width: 100%;
+    }
+  }
 }
 </style>
