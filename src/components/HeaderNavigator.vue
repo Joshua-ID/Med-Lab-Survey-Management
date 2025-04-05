@@ -2,7 +2,7 @@
   <div class="header-container">
     <AppDrawer />
     <div class="avatar-and-theme">
-      <Avatar image="/public/defualt-user-icon.png" shape="circle" />
+      <Avatar image="/public/default-user-icon.png" shape="circle" />
 
       <LogoutButton />
       <ToggleMoodComponent />

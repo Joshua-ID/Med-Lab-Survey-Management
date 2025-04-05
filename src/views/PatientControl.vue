@@ -43,10 +43,6 @@
 
       <template #empty>
         <div class="table-empty-state">
-          <img
-            class="empty-state-icon"
-            src="../assets/svgs/table-empty-state.png"
-          />
           <label class="empty-state-text">No table data</label>
         </div>
       </template>
@@ -167,8 +163,6 @@ export default {
       isLoadingTable: false,
       newPatient: {
         name: "",
-        gender: null,
-        guardian: null,
         address: "",
         phone: "",
         bookAppointment: "",
@@ -324,25 +318,6 @@ export default {
     .add-button {
       white-space: nowrap;
       padding: 10px 2rem !important;
-    }
-  }
-
-  .table-empty-state {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-    gap: 2rem;
-    /* height: 320px; */
-
-    .empty-state-icon {
-      width: 250px;
-      height: 250px;
-      height: auto;
-    }
-
-    .empty-state-text {
-      font-weight: bold;
     }
   }
 }

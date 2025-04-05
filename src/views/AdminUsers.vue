@@ -4,40 +4,47 @@
     <DataTable :value="users" paginator :rows="10" responsiveLayout="scroll">
       <Column field="photoURL" header="Photo">
         <template #body="slotProps">
-          <img class="image" :src="slotProps.data.photoURL" />
+          <img class="image" :src="slotProps.data.photoURL || defaultAvatar" />
         </template>
       </Column>
       <Column field="name" header="Name"></Column>
       <Column field="email" header="Email"></Column>
       <Column field="role" header="Role"></Column>
+      <Column field="createdAt" header="Created At"></Column>
       <Column v-if="isAdmin" header="Actions">
         <template #body="slotProps">
-          <Button
-            icon="pi pi-pencil"
-            class="p-button-warning"
-            @click="editUser(slotProps.data)"
-          />
-          <Button
-            icon="pi pi-trash"
-            class="p-button-danger"
-            @click="deleteUser(slotProps.data.id)"
-          />
+          <div class="actions-column">
+            <SpeedDial
+              :model="getActions(slotProps.data)"
+              :tooltipOptions="{ position: 'left' }"
+              direction="right"
+            />
+          </div>
         </template>
       </Column>
+
+      <template #empty>
+        <div class="table-empty-state">
+          <label class="empty-state-text">No table data</label>
+        </div>
+      </template>
     </DataTable>
 
     <Dialog v-model:visible="editDialog" header="Edit User" :modal="true">
-      <div>
+      <div class="edit-content-wrapper">
         <InputText
           :invalid="!selectedUser.name"
           v-model="selectedUser.name"
           placeholder="Name"
         />
-        <Dropdown
+        <Select
           v-model="selectedUser.role"
           :options="roles"
-          placeholder="Select Role"
           :disabled="!isAdmin"
+          optionLabel="name"
+          optionValue="value"
+          checkmark
+          :highlightOnSelect="false"
         />
         <InputText v-model="selectedUser.photoURL" placeholder="Photo URL" />
       </div>
@@ -50,7 +57,8 @@
           @click="editDialog = false"
         />
         <Button
-          label="Save"
+          label="Update"
+          :loading="isLoading"
           icon="pi pi-check"
           class="p-button-success"
           :disabled="!selectedUser.name"
@@ -71,19 +79,25 @@ import {
   doc,
   deleteDoc,
 } from "firebase/firestore";
-import { Column, DataTable, Dialog } from "primevue";
-import { useToast } from "primevue/usetoast";
+import { Column, DataTable, Dialog, Select, SpeedDial } from "primevue";
+import { Toast } from "primevue";
 
 export default {
   name: "AdminUsers",
-  components: { Column, DataTable, Dialog },
+  components: { Column, DataTable, Dialog, Toast, SpeedDial, Select },
   data() {
     return {
+      defaultAvatar: "/public/default-user-icon.png",
       users: [],
       editDialog: false,
       selectedUser: {},
-      roles: ["admin", "user"],
-      toast: useToast(),
+      isLoading: false,
+      roles: [
+        { name: "Admin", value: "Admin" },
+        { name: "User", value: "User" },
+        { name: "Marketer", value: "Marketer" },
+        { name: "Editor", value: "Editor" },
+      ],
       isAdmin: false,
     };
   },
@@ -93,6 +107,21 @@ export default {
     this.isAdmin = loggedInUser && loggedInUser.role === "admin";
   },
   methods: {
+    getActions(user) {
+      return [
+        {
+          label: "Edit",
+          icon: "pi pi-pencil",
+          command: () => this.editUser(user),
+        },
+        {
+          label: "Delete",
+          icon: "pi pi-trash",
+          command: () => this.deleteUser(user.id),
+        },
+      ];
+    },
+
     async fetchUsers() {
       const querySnapshot = await getDocs(collection(db, "users"));
       this.users = querySnapshot.docs.map((doc) => ({
@@ -105,14 +134,27 @@ export default {
       this.editDialog = true;
     },
     async updateUser() {
+      if (!this.selectedUser.role || !this.selectedUser.name) {
+        this.$toast.add({
+          severity: "error",
+          summary: "Empty Fields",
+          details: "Please fill in required fields!",
+          life: 3000,
+        });
+        return;
+      }
+
       try {
+        this.isLoading = true;
         const userRef = doc(db, "users", this.selectedUser.id);
         await updateDoc(userRef, {
           name: this.selectedUser.name,
-          //   role: this.isAdmin ? this.selectedUser.role : undefined,
+          role: this.isAdmin
+            ? this.selectedUser.role
+            : this.selectedUser.role.name,
           photoURL: this.selectedUser.photoURL,
         });
-        this.toast.add({
+        this.$toast.add({
           severity: "success",
           summary: "Success",
           detail: "User updated!",
@@ -120,17 +162,18 @@ export default {
         this.editDialog = false;
         this.fetchUsers();
       } catch (error) {
-        this.toast.add({
+        this.$toast.add({
           severity: "error",
           summary: "Error",
           detail: error.message,
         });
       }
+      this.isLoading = false;
     },
     async deleteUser(id) {
       try {
         if (!this.isAdmin) {
-          this.toast.add({
+          this.$toast.add({
             severity: "warn",
             summary: "Unauthorized",
             detail: "Only admins can delete users!",
@@ -138,14 +181,14 @@ export default {
           return;
         }
         await deleteDoc(doc(db, "users", id));
-        this.toast.add({
+        this.$toast.add({
           severity: "warn",
           summary: "Deleted",
           detail: "User removed!",
         });
         this.fetchUsers();
       } catch (error) {
-        this.toast.add({
+        this.$toast.add({
           severity: "error",
           summary: "Error",
           detail: error.message,
@@ -159,6 +202,9 @@ export default {
 <style scoped>
 .admin-users-container {
   padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
 
   .image {
     border-radius: 50%;
@@ -167,5 +213,18 @@ export default {
     border: 2px solid var(--st-surface-sleek);
     object-fit: cover;
   }
+
+  .actions-column {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    height: 100%;
+  }
+}
+
+.edit-content-wrapper {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
 }
 </style>

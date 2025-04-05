@@ -4,8 +4,16 @@
       <h2>Register</h2>
       <div class="auth-card">
         <FloatLabel variant="on">
+          <InputText
+            id="username"
+            v-model="username"
+            size="large"
+            variant="filled"
+          />
+          <label for="username">Full Name</label>
+        </FloatLabel>
+        <FloatLabel variant="on">
           <InputText id="email" v-model="email" size="large" variant="filled" />
-
           <label for="email">Email</label>
         </FloatLabel>
 
@@ -52,6 +60,7 @@ export default {
   },
   data() {
     return {
+      username: "",
       email: "",
       password: "",
       loading: false,
@@ -69,25 +78,36 @@ export default {
         const user = userCredential.user;
 
         await setDoc(doc(db, "users", user.uid), {
+          name: this.username,
+          role: "User",
           email: user.email,
-          role: "user",
+          createdAt: new Date().toLocaleString("en-US", {
+            weekday: "long",
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+            hour: "numeric",
+            minute: "numeric",
+            second: "numeric",
+            hour12: true,
+          }),
         });
 
         localStorage.setItem(
           "user",
-          JSON.stringify({ email: user.email, role: "user" })
+          JSON.stringify({ email: user.email, role: "User", name: user.name })
         );
         this.$router.push("/dashboard");
         this.toast.add({
           severity: "success",
           summary: "Registration Successful",
-          detail: "Login",
+          detail: "Register",
           life: 10000,
         });
       } catch (error) {
         this.toast.add({
           severity: "error",
-          summary: "Login Failed",
+          summary: "Registration Failed",
           detail: error.message,
           life: 3000,
         });
