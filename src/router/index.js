@@ -22,24 +22,29 @@ const routes = [
   {
     path: "/admin",
     component: AdminPanel,
+    meta: { requiresAuth: true },
   },
 
   // pages
   {
     path: "/patient",
     component: () => import("../views/PatientControl.vue"),
+    meta: { requiresAuth: true },
   },
   {
     path: "/view-staff",
     component: () => import("../views/StaffUsers.vue"),
+    meta: { requiresAuth: true },
   },
   {
     path: "/view-doctor",
     component: () => import("../views/DoctorsView.vue"),
+    meta: { requiresAuth: true },
   },
   {
     path: "/admin-users",
     component: () => import("../views/AdminUsers.vue"),
+    meta: { requiresAuth: true },
   },
 
   // 404 page
