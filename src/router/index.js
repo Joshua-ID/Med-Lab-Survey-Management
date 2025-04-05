@@ -6,10 +6,21 @@ import Register from "../views/Register.vue";
 import Dashboard from "../views/Dashboard.vue";
 import AdminPanel from "../views/AdminPanel.vue";
 import NotFoundPage from "../views/NotFoundPage.vue";
+import LandingPage from "../views/LandingPage.vue";
 
 const routes = [
+  // landing page
+  {
+    path: "/med-lab-survey",
+    component: LandingPage,
+  },
+  {
+    path: "/",
+    redirect: "/med-lab-survey",
+  },
+
   // login
-  { path: "/", redirect: "/auth-login" },
+
   { path: "/auth-login", component: Login },
   { path: "/register", component: Register },
 

@@ -1,7 +1,10 @@
 <template>
   <div class="app">
+    <HeaderNavigator
+      v-if="!$route.path === '/med-lab-survey'"
+      v-show="!disableNavigator"
+    />
     <Toast position="bottom-right" />
-    <HeaderNavigator v-show="!disableNavigator" />
     <router-view />
   </div>
 </template>
@@ -16,6 +19,7 @@ export default {
   data() {
     return {
       disableNavigator: false,
+      isHomePage: true,
     };
   },
 

@@ -13,6 +13,19 @@
   --white: #e9f1f7;
   --sleek-color: #a653f0;
   --dark: #131b23;
+
+  --primary: #1976d2;
+  --primary-dark: #0d47a1;
+  --secondary: #5c6bc0;
+  --accent: #00bcd4;
+  --grey-light: #f5f7fa;
+  --grey: #e1e5ee;
+  --grey-dark: #6c757d;
+  --text: #333;
+  --text-light: #666;
+  --white: #fff;
+  --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --radius: 8px;
 }
 
 .dark {
