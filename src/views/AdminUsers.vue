@@ -34,6 +34,13 @@
       </template>
     </DataTable>
 
+    <ConfirmationDialog
+      v-model:visible="visible"
+      modal-title="Delete User"
+      :modal-description="formattedModalDescription"
+      @confirm="deleteUser"
+    />
+
     <Dialog v-model:visible="editDialog" header="Edit User" :modal="true">
       <div class="edit-content-wrapper">
         <InputText
@@ -83,16 +90,24 @@ import {
   doc,
   deleteDoc,
 } from "firebase/firestore";
-import { Column, DataTable, Dialog, Select, SpeedDial } from "primevue";
-import { Toast } from "primevue";
+import { Column, DataTable, Select, SpeedDial } from "primevue";
+import ConfirmationDialog from "../components/confirmationDialog.vue";
 
 export default {
   name: "AdminUsers",
-  components: { Column, DataTable, Dialog, Toast, SpeedDial, Select },
+  components: {
+    Column,
+    DataTable,
+    SpeedDial,
+    Select,
+    ConfirmationDialog,
+  },
   data() {
     return {
+      visible: false,
       defaultAvatar: "/public/default-user-icon.png",
       users: [],
+      userToDelete: null,
       editDialog: false,
       selectedUser: {},
       isLoading: false,
@@ -104,6 +119,11 @@ export default {
       ],
       isAdmin: false,
     };
+  },
+  computed: {
+    formattedModalDescription() {
+      return `Are you sure you want to delete ${this.userToDelete.name}`;
+    },
   },
   created() {
     this.fetchUsers();
@@ -125,7 +145,10 @@ export default {
         {
           label: "Delete",
           icon: "pi pi-trash",
-          command: () => this.deleteUser(user.id),
+          command: () => {
+            this.userToDelete = user;
+            this.visible = true;
+          },
         },
       ];
     },
@@ -178,7 +201,7 @@ export default {
       }
       this.isLoading = false;
     },
-    async deleteUser(id) {
+    async deleteUser() {
       try {
         if (!this.isAdmin) {
           this.$toast.add({
@@ -188,7 +211,10 @@ export default {
           });
           return;
         }
-        await deleteDoc(doc(db, "users", id));
+
+        if (!this.userToDelete || !this.userToDelete.id) return;
+
+        await deleteDoc(doc(db, "users", this.userToDelete.id));
         this.$toast.add({
           severity: "warn",
           summary: "Deleted",
@@ -201,6 +227,9 @@ export default {
           summary: "Error",
           detail: error.message,
         });
+      } finally {
+        this.visible = false;
+        this.userToDelete = null;
       }
     },
   },

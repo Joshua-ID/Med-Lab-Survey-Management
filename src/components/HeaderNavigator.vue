@@ -2,11 +2,17 @@
   <div class="header-container">
     <AppDrawer />
     <div class="avatar-and-theme">
-      <Avatar image="/public/default-user-icon.png" shape="circle" />
+      <Avatar :image="userPhoto" shape="circle" />
 
-      <LogoutButton />
+      <Button label="Logout" class="logout-button" @click="openModal" />
       <ToggleMoodComponent />
     </div>
+    <ConfirmationDialog
+      v-model:visible="visible"
+      modal-title="Logout"
+      modalDescription="Are you sure you want to logout"
+      @confirm="handleLogout"
+    />
   </div>
 </template>
 
@@ -15,7 +21,9 @@ import { Avatar } from "primevue";
 import AppDrawer from "../components/AppDrawer.vue";
 
 import ToggleMoodComponent from "../components/toggleMoodComponent.vue";
-import LogoutButton from "./LogoutButton.vue";
+import ConfirmationDialog from "./confirmationDialog.vue";
+import { signOut } from "firebase/auth";
+import { auth } from "../firebase";
 
 export default {
   name: "HeaderNavigator",
@@ -23,12 +31,28 @@ export default {
     ToggleMoodComponent,
     Avatar,
     AppDrawer,
-    LogoutButton,
+    ConfirmationDialog,
   },
   data() {
     return {
-      displayModal: false,
+      visible: false,
+      defaultAvatar: "/public/default-user-icon.png",
     };
+  },
+  methods: {
+    openModal() {
+      this.visible = true;
+    },
+    async handleLogout() {
+      this.visible = false;
+      await signOut(auth);
+      localStorage.clear();
+      this.$router.push("/auth-login");
+    },
+  },
+  created() {
+    const storedUser = JSON.parse(localStorage.getItem("user"));
+    this.userPhoto = storedUser?.photoURL || this.defaultAvatar;
   },
 };
 </script>
