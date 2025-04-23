@@ -14,9 +14,9 @@
   --sleek-color: #a653f0;
   --dark: #131b23;
 
-  --primary: #1976d2;
-  --primary-dark: #0d47a1;
-  --secondary: #5c6bc0;
+  --primary: #6d28d9;
+  --primary-dark: #321d7c;
+  --secondary: #194a7a;
   --accent: #00bcd4;
   --grey-light: #f5f7fa;
   --grey: #e1e5ee;
@@ -43,8 +43,10 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
+    /* backdrop-filter: opacity(20%); */
+
     background-image: linear-gradient(rgba(0, 0, 0, 0.77), rgba(0, 0, 0, 0.71)),
-      url("./assets/svgs/auth-login-background.jpg");
+      url("./assets/svgs/background.jpg");
 
     background-repeat: no-repeat;
     background-size: cover;
@@ -62,6 +64,7 @@ body {
       gap: 2rem;
       background: white;
       text-align: center;
+      backdrop-filter: blur(10px);
 
       .auth-card {
         display: flex;

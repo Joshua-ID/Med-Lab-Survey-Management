@@ -9,7 +9,11 @@
       </Column>
       <Column field="name" header="Name"></Column>
       <Column field="email" header="Email"></Column>
-      <Column field="role" header="Role"></Column>
+      <Column field="role" header="Role">
+        <template #body="slotProps">
+          <span>{{ capitalizeRoleValue(slotProps) }}</span>
+        </template>
+      </Column>
       <Column field="createdAt" header="Created At"></Column>
       <Column v-if="isAdmin" header="Actions">
         <template #body="slotProps">
@@ -93,10 +97,10 @@ export default {
       selectedUser: {},
       isLoading: false,
       roles: [
-        { name: "Admin", value: "Admin" },
-        { name: "User", value: "User" },
-        { name: "Marketer", value: "Marketer" },
-        { name: "Editor", value: "Editor" },
+        { name: "Admin", value: "admin" },
+        { name: "User", value: "user" },
+        { name: "Marketer", value: "marketer" },
+        { name: "Editor", value: "editor" },
       ],
       isAdmin: false,
     };
@@ -107,6 +111,10 @@ export default {
     this.isAdmin = loggedInUser && loggedInUser.role === "admin";
   },
   methods: {
+    capitalizeRoleValue(slotProps) {
+      const role = slotProps.data.role;
+      return role.charAt(0).toUpperCase() + role.slice(1).toLowerCase();
+    },
     getActions(user) {
       return [
         {
@@ -152,7 +160,7 @@ export default {
           role: this.isAdmin
             ? this.selectedUser.role
             : this.selectedUser.role.name,
-          photoURL: this.selectedUser.photoURL,
+          photoURL: this.selectedUser.photoURL || "",
         });
         this.$toast.add({
           severity: "success",

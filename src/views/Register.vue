@@ -79,7 +79,7 @@ export default {
 
         await setDoc(doc(db, "users", user.uid), {
           name: this.username,
-          role: "User",
+          role: "user",
           email: user.email,
           createdAt: new Date().toLocaleString("en-US", {
             weekday: "long",
@@ -95,7 +95,7 @@ export default {
 
         localStorage.setItem(
           "user",
-          JSON.stringify({ email: user.email, role: "User", name: user.name })
+          JSON.stringify({ email: user.email, role: "user", name: user.name })
         );
         this.$router.push("/dashboard");
         this.toast.add({

@@ -41,6 +41,10 @@ export default {
   gap: 1rem;
   justify-content: space-between;
   align-items: center;
+  position: sticky;
+  top: -10px;
+  z-index: 1000;
+  box-shadow: var(--shadow);
 
   .avatar-and-theme {
     display: flex;
