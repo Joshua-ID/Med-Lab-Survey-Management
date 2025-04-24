@@ -4,8 +4,8 @@ import { createRouter, createWebHistory } from "vue-router";
 import Login from "../views/AuthLogin.vue";
 import Register from "../views/Register.vue";
 import Dashboard from "../views/Dashboard.vue";
-import AdminPanel from "../views/AdminPanel.vue";
 import NotFoundPage from "../views/NotFoundPage.vue";
+import MonitoringAdmin from "../views/MonitoringAdmin.vue";
 
 const routes = [
   // login
@@ -19,8 +19,8 @@ const routes = [
     meta: { requiresAuth: true },
   },
   {
-    path: "/admin",
-    component: AdminPanel,
+    path: "/monitoring-admin",
+    component: MonitoringAdmin,
     meta: { requiresAuth: true },
   },
 

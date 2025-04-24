@@ -78,7 +78,7 @@ export default {
           localStorage.setItem("user", JSON.stringify(userData));
 
           if (userData.role === "admin") {
-            this.$router.push("/admin");
+            this.$router.push("/monitoring-admin");
             successMessage;
           } else {
             this.$router.push("/dashboard");

@@ -7,11 +7,15 @@
     <div class="drawer-content">
       <div class="list-item">
         <router-link
-          :to="{ path: userRole ? 'admin' : 'dashboard' }"
+          :to="{
+            path: userRole === 'admin' ? 'monitoring-admin' : 'dashboard',
+          }"
           class="item"
         >
           <i class="pi pi-objects-column"></i>
-          <span @click="dashboard">Overview</span>
+          <span @click="dashboard">{{
+            userRole === "admin" ? "Data Analysis" : "Overview"
+          }}</span>
         </router-link>
         <router-link :to="{ path: 'patient' }" class="item">
           <i class="pi pi-truck"></i>
@@ -24,10 +28,6 @@
         <router-link :to="{ path: 'view-doctor' }" class="item">
           <i class="pi pi-user"></i>
           <span>Medical Staff</span>
-        </router-link>
-        <router-link :to="{ path: '' }" class="item">
-          <i class="pi pi-chart-line"></i>
-          <span @click="">Monitoring</span>
         </router-link>
         <router-link :to="{ path: 'admin-users' }" class="item">
           <i class="pi pi-warehouse"></i>
@@ -87,9 +87,11 @@ export default {
       cursor: pointer;
       text-decoration: none;
       color: var(--st-surface-text);
+      transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
 
       &:hover {
         background-color: aliceblue;
+        transform: translateY(-2px) scale(1.05);
       }
     }
   }
