@@ -150,56 +150,7 @@
     </section>
 
     <!-- Testimonials -->
-    <section id="testimonials" class="testimonials">
-      <div class="container">
-        <div class="section-header">
-          <h2>Trusted by Leading Healthcare Providers</h2>
-          <p>See what our customers have to say about us</p>
-        </div>
-
-        <div class="testimonials-slider">
-          <div class="testimonial">
-            <div class="testimonial-content">
-              <p>
-                "Implementing this hospital management system has transformed
-                our operations. We've seen a 30% reduction in administrative
-                work and significantly improved patient satisfaction."
-              </p>
-            </div>
-            <div class="testimonial-author">
-              <img
-                src="../assets/svgs/groupdoctorr.png"
-                alt="Dr. Sarah Johnson"
-              />
-              <div>
-                <h4>Dr. Sarah Johnson</h4>
-                <p>Medical Director, City General Hospital</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="testimonial">
-            <div class="testimonial-content">
-              <p>
-                "The patient management features are outstanding. We can access
-                complete patient history instantly, which has improved our
-                diagnostic accuracy and treatment planning."
-              </p>
-            </div>
-            <div class="testimonial-author">
-              <img
-                src="../assets/svgs/groupdoctorr.png"
-                alt="Dr. Michael Chen"
-              />
-              <div>
-                <h4>Dr. Michael Chen</h4>
-                <p>Chief of Medicine, Westside Medical Center</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+    <TestimonialSection />
 
     <!-- Pricing -->
     <section id="pricing" class="pricing">
@@ -342,74 +293,20 @@
     </section>
 
     <!-- Footer -->
-    <footer class="footer">
-      <div class="container">
-        <div class="footer-content">
-          <div class="footer-brand">
-            <img
-              src="../assets/svgs/groupdoctorr.png"
-              alt="Med-Lab-Survey Logo"
-            />
-            <p>
-              Modern hospital management solutions for healthcare providers of
-              all sizes.
-            </p>
-            <div class="social-links">
-              <a href="#"><i class="pi pi-facebook"></i></a>
-              <a href="#"><i class="pi pi-twitter"></i></a>
-              <a href="#"><i class="pi pi-linkedin"></i></a>
-              <a href="#"><i class="pi pi-instagram"></i></a>
-            </div>
-          </div>
-
-          <div class="footer-links">
-            <div class="footer-column">
-              <h4>Company</h4>
-              <ul>
-                <li><a href="#">About Us</a></li>
-                <li><a href="#">Leadership</a></li>
-                <li><a href="#">Careers</a></li>
-                <li><a href="#">News & Press</a></li>
-              </ul>
-            </div>
-
-            <div class="footer-column">
-              <h4>Solutions</h4>
-              <ul>
-                <li><a href="#">For Hospitals</a></li>
-                <li><a href="#">For Clinics</a></li>
-                <li><a href="#">For Specialists</a></li>
-                <li><a href="#">For Labs</a></li>
-              </ul>
-            </div>
-
-            <div class="footer-column">
-              <h4>Resources</h4>
-              <ul>
-                <li><a href="#">Blog</a></li>
-                <li><a href="#">Case Studies</a></li>
-                <li><a href="#">Documentation</a></li>
-                <li><a href="#">Support Center</a></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
-        <div class="footer-bottom">
-          <p>&copy; 2025 Med-Lab-Survey. All rights reserved.</p>
-          <div class="legal-links">
-            <a href="#">Privacy Policy</a>
-            <a href="#">Terms of Service</a>
-            <a href="#">HIPAA Compliance</a>
-          </div>
-        </div>
-      </div>
-    </footer>
+    <FooterSection />
   </div>
 </template>
 
 <script>
+import FooterSection from "./FooterSection.vue";
+import TestimonialSection from "./TestimonialSection.vue";
+
 export default {
+  name: "Dashboard",
+  components: {
+    TestimonialSection,
+    FooterSection,
+  },
   data() {
     return {
       user: JSON.parse(localStorage.getItem("user")) || {},
@@ -433,16 +330,20 @@ export default {
   .section-header {
     text-align: center;
     margin-bottom: 50px;
+
+    @media (max-width: 768px) {
+      margin-bottom: 20px;
+    }
   }
 
   .section-header h2 {
-    font-size: 36px;
+    font-size: clamp(1.1875rem, 0.8839rem + 1.5179vw, 2.25rem);
     margin-bottom: 16px;
     color: var(--text);
   }
 
   .section-header p {
-    font-size: 18px;
+    font-size: clamp(1rem, 0.9643rem + 0.1786vw, 1.125rem);
     color: var(--text-light);
     max-width: 600px;
     margin: 0 auto;
@@ -660,60 +561,6 @@ export default {
     color: var(--text-light);
   }
 
-  /* Testimonials */
-  .testimonials {
-    background-color: var(--white);
-  }
-
-  .testimonials-slider {
-    display: flex;
-    gap: 30px;
-    overflow-x: auto;
-    padding-bottom: 20px;
-  }
-
-  .testimonial {
-    background-color: var(--white);
-    border-radius: var(--radius);
-    box-shadow: var(--shadow);
-    padding: 30px;
-    flex: 0 0 calc(50% - 15px);
-  }
-
-  .testimonial-content {
-    margin-bottom: 20px;
-  }
-
-  .testimonial-content p {
-    font-size: 18px;
-    font-style: italic;
-    color: var(--text);
-    line-height: 1.7;
-  }
-
-  .testimonial-author {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-  }
-
-  .testimonial-author img {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    object-fit: cover;
-  }
-
-  .testimonial-author h4 {
-    font-size: 18px;
-    margin-bottom: 4px;
-  }
-
-  .testimonial-author p {
-    color: var(--text-light);
-    font-size: 14px;
-  }
-
   /* Pricing Section */
   .pricing {
     background-color: var(--grey-light);
@@ -869,109 +716,6 @@ export default {
     border-color: var(--primary);
   }
 
-  /* Footer */
-  .footer {
-    background-color: #f8f9fa;
-    padding: 60px 0 20px;
-  }
-
-  .footer-content {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 40px;
-  }
-
-  .footer-brand {
-    max-width: 300px;
-  }
-
-  .footer-brand img {
-    margin-bottom: 20px;
-  }
-
-  .footer-brand p {
-    margin-bottom: 20px;
-    color: var(--text-light);
-  }
-
-  .social-links {
-    display: flex;
-    gap: 16px;
-  }
-
-  .social-links a {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background-color: var(--primary);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--white);
-    transition: background-color 0.3s ease;
-  }
-
-  .social-links a:hover {
-    background-color: var(--primary-dark);
-  }
-
-  .footer-links {
-    display: flex;
-    gap: 60px;
-  }
-
-  .footer-column h4 {
-    font-size: 18px;
-    margin-bottom: 20px;
-    color: var(--text);
-  }
-
-  .footer-column ul {
-    list-style: none;
-  }
-
-  .footer-column ul li {
-    margin-bottom: 10px;
-  }
-
-  .footer-column ul li a {
-    text-decoration: none;
-    color: var(--text-light);
-    transition: color 0.3s ease;
-  }
-
-  .footer-column ul li a:hover {
-    color: var(--primary);
-  }
-
-  .footer-bottom {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-top: 20px;
-    border-top: 1px solid var(--grey);
-  }
-
-  .footer-bottom p {
-    color: var(--text-light);
-  }
-
-  .legal-links {
-    display: flex;
-    gap: 20px;
-  }
-
-  .legal-links a {
-    text-decoration: none;
-    color: var(--text-light);
-    font-size: 14px;
-    transition: color 0.3s ease;
-  }
-
-  .legal-links a:hover {
-    color: var(--primary);
-  }
-
   /* Responsive Design */
   @media (max-width: 992px) {
     .hero .container {
@@ -1039,6 +783,10 @@ export default {
   }
 
   @media (max-device-width: 500px) {
+    .container {
+      padding: 10px;
+    }
+
     .footer-links {
       align-items: center;
       flex-direction: column;

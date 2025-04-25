@@ -21,7 +21,7 @@ const routes = [
   {
     path: "/monitoring-admin",
     component: MonitoringAdmin,
-    meta: { requiresAuth: true },
+    meta: { requiresAuth: true, requiresAdmin: true },
   },
 
   // pages

@@ -2,7 +2,11 @@
   <div class="header-container">
     <AppDrawer />
     <div class="avatar-and-theme">
-      <Avatar :image="userPhoto" shape="circle" />
+      <Avatar
+        v-tooltip.bottom="{ value: userName, autoHide: false, hideDelay: 300 }"
+        :image="userPhoto"
+        shape="circle"
+      />
 
       <Button label="Logout" class="logout-button" @click="openModal" />
       <ToggleMoodComponent />
@@ -19,7 +23,6 @@
 <script>
 import { Avatar } from "primevue";
 import AppDrawer from "../components/AppDrawer.vue";
-
 import ToggleMoodComponent from "../components/toggleMoodComponent.vue";
 import ConfirmationDialog from "./confirmationDialog.vue";
 import { signOut } from "firebase/auth";
@@ -53,6 +56,7 @@ export default {
   created() {
     const storedUser = JSON.parse(localStorage.getItem("user"));
     this.userPhoto = storedUser?.photoURL || this.defaultAvatar;
+    this.userName = storedUser?.name || "Guest";
   },
 };
 </script>

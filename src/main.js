@@ -14,6 +14,7 @@ import {
   InputText,
   ToastService,
   Dialog,
+  Tooltip,
 } from "primevue";
 const app = createApp(App);
 
@@ -64,5 +65,6 @@ app.component("InputText", InputText);
 app.component("Password", Password);
 app.component("Toast", Toast);
 app.component("Dialog", Dialog);
+app.directive("Tooltip", Tooltip);
 
 app.mount("#app");
