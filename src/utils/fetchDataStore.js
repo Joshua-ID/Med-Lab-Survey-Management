@@ -5,7 +5,6 @@ const API_URL_RANDOM = import.meta.env.VITE_API_URL_RANDOM;
 export async function fetchStaffRandom(limit = 10) {
   try {
     const response = await axios.get(`${API_URL_RANDOM}?results=${limit}`);
-    console.log("random--success", response);
     return response.data.results;
   } catch (error) {
     console.error("Error fetching staff data:", error);

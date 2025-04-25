@@ -2,7 +2,7 @@
   <div class="doctor-view-container">
     <h2>Our Doctors</h2>
     <div class="grid">
-      <div v-for="(doctor, index) in doctorList" :key="index">
+      <div v-for="(doctor, index) in paginatedDoctor" :key="index">
         <UserCardComponent
           :image="doctor.picture?.medium"
           :age="doctor.dob?.age"
@@ -16,34 +16,60 @@
         />
       </div>
     </div>
+
+    <Paginator
+      :rows="itemsPerPage"
+      :totalRecords="doctorList.length"
+      :rowsPerPageOptions="[16, 32, 48]"
+      @page="onPageChange"
+      class="custom-paginator"
+    />
   </div>
 </template>
 
 <script>
+import { Paginator } from "primevue";
 import UserCardComponent from "../components/userCardComponent.vue";
 import { fetchStaffRandom } from "../utils/fetchDataStore";
 
 export default {
   name: "DoctorsView",
-  components: { UserCardComponent },
+  components: { UserCardComponent, Paginator },
   data() {
+    const placeholderData = Array(30).fill({});
     return {
-      doctorList: Array(18).fill({}),
+      doctorList: placeholderData,
       isLoading: true,
+      first: 0,
+      itemsPerPage: 16,
+      paginatedDoctor: placeholderData.slice(0, 16), // Initial fake page
     };
   },
 
-  async mounted() {
+  async created() {
+    this.updatePaginatedDoctor();
     try {
-      await new Promise((resolve) => setTimeout(resolve, 500));
-
       const doctors = await fetchStaffRandom(30);
       this.doctorList = doctors;
+      this.updatePaginatedDoctor(); // Refresh paginated with real data
     } catch (error) {
       console.error("Failed to fetch doctors:", error);
     } finally {
       this.isLoading = false;
     }
+  },
+
+  methods: {
+    onPageChange(event) {
+      this.first = event.first;
+      this.itemsPerPage = event.rows;
+      this.updatePaginatedDoctor();
+    },
+    updatePaginatedDoctor() {
+      const start = this.first;
+      const end = this.first + this.itemsPerPage;
+      this.paginatedDoctor = this.doctorList.slice(start, end);
+    },
   },
 };
 </script>
