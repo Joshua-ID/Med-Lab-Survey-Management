@@ -35,82 +35,7 @@
     </section>
 
     <!-- Features Section -->
-    <section id="features" class="features">
-      <div class="container">
-        <div class="section-header">
-          <h2>Comprehensive Hospital Management Features</h2>
-          <p>Everything you need to run your healthcare facility efficiently</p>
-        </div>
-
-        <div class="feature-grid">
-          <div class="feature-card">
-            <div class="feature-icon">
-              <i class="pi pi-calendar"></i>
-            </div>
-            <h3>Appointment Scheduling</h3>
-            <p>
-              Efficiently manage appointments with an intuitive calendar
-              interface. Reduce no-shows with automated reminders.
-            </p>
-          </div>
-
-          <div class="feature-card">
-            <div class="feature-icon">
-              <i class="pi pi-user"></i>
-            </div>
-            <h3>Patient Management</h3>
-            <p>
-              Track patient records, medical history, and treatment plans in a
-              secure, HIPAA-compliant environment.
-            </p>
-          </div>
-
-          <div class="feature-card">
-            <div class="feature-icon">
-              <i class="pi pi-users"></i>
-            </div>
-            <h3>Staff Management</h3>
-            <p>
-              Schedule shifts, manage departments, and track staff credentials
-              and certifications.
-            </p>
-          </div>
-
-          <div class="feature-card">
-            <div class="feature-icon">
-              <i class="pi pi-chart-bar"></i>
-            </div>
-            <h3>Billing & Insurance</h3>
-            <p>
-              Streamline billing processes, insurance claims, and financial
-              reporting with integrated payment solutions.
-            </p>
-          </div>
-
-          <div class="feature-card">
-            <div class="feature-icon">
-              <i class="pi pi-box"></i>
-            </div>
-            <h3>Inventory Management</h3>
-            <p>
-              Track medical supplies, equipment, and medications with automated
-              reordering capabilities.
-            </p>
-          </div>
-
-          <div class="feature-card">
-            <div class="feature-icon">
-              <i class="pi pi-chart-line"></i>
-            </div>
-            <h3>Analytics & Reporting</h3>
-            <p>
-              Make data-driven decisions with comprehensive analytics and
-              customizable reports.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
+    <ProductMarketingSection />
 
     <!-- How It Works -->
     <section class="how-it-works">
@@ -299,6 +224,7 @@
 
 <script>
 import FooterSection from "./FooterSection.vue";
+import ProductMarketingSection from "./ProductMarketingSection.vue";
 import TestimonialSection from "./TestimonialSection.vue";
 
 export default {
@@ -306,6 +232,7 @@ export default {
   components: {
     TestimonialSection,
     FooterSection,
+    ProductMarketingSection,
   },
   data() {
     return {
@@ -325,6 +252,14 @@ export default {
 
   section {
     padding: 80px 0;
+
+    @media (max-width: 768px) {
+      padding: 40px 0;
+    }
+
+    @media (max-width: 400x) {
+      padding: 20px 0;
+    }
   }
 
   .section-header {
@@ -461,52 +396,6 @@ export default {
   }
 
   /* Features Section */
-  .features {
-    background-color: var(--white);
-  }
-
-  .feature-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 30px;
-  }
-
-  .feature-card {
-    background-color: var(--white);
-    border-radius: var(--radius);
-    padding: 30px;
-    box-shadow: var(--shadow);
-    transition: transform 0.3s ease;
-  }
-
-  .feature-card:hover {
-    transform: translateY(-5px);
-  }
-
-  .feature-icon {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    background-color: rgba(25, 118, 210, 0.1);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 20px;
-  }
-
-  .feature-icon i {
-    font-size: 24px;
-    color: var(--primary);
-  }
-
-  .feature-card h3 {
-    font-size: 22px;
-    margin-bottom: 16px;
-  }
-
-  .feature-card p {
-    color: var(--text-light);
-  }
 
   /* How it Works */
   .how-it-works {
@@ -767,18 +656,6 @@ export default {
   @media (max-width: 768px) {
     nav ul {
       display: none;
-    }
-
-    .feature-grid {
-      grid-template-columns: 1fr;
-    }
-
-    .testimonials-slider {
-      flex-direction: column;
-    }
-
-    .testimonial {
-      flex: 0 0 100%;
     }
   }
 

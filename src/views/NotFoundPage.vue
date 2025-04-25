@@ -85,4 +85,24 @@ export default {
     }
   }
 }
+
+.left-wrapper {
+  animation: moveUp 3s cubic-bezier(0.075, 0.82, 0.165, 1) infinite;
+}
+
+@keyframes moveUp {
+  0% {
+    transform: translateY(0);
+  }
+  20% {
+    transform: translateY(-50px);
+  }
+
+  80% {
+    transform: translateY(50px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
 </style>
