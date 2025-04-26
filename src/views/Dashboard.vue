@@ -78,83 +78,7 @@
     <TestimonialSection />
 
     <!-- Pricing -->
-    <section id="pricing" class="pricing">
-      <div class="container">
-        <div class="section-header">
-          <h2>Flexible Pricing Options</h2>
-          <p>Solutions for hospitals and clinics of all sizes</p>
-        </div>
-
-        <div class="pricing-tiers">
-          <div class="pricing-card">
-            <div class="pricing-header">
-              <h3>Standard</h3>
-              <div class="price">
-                <span class="currency">$</span>
-                <span class="amount">699</span>
-                <span class="period">/month</span>
-              </div>
-              <p>For small clinics and practices</p>
-            </div>
-            <div class="pricing-features">
-              <ul>
-                <li>Up to 10 practitioners</li>
-                <li>Appointment scheduling</li>
-                <li>Patient records</li>
-                <li>Basic reporting</li>
-                <li>Email support</li>
-              </ul>
-            </div>
-            <button class="btn btn-outline btn-block">Get Started</button>
-          </div>
-
-          <div class="pricing-card featured">
-            <div class="popular-tag">Most Popular</div>
-            <div class="pricing-header">
-              <h3>Professional</h3>
-              <div class="price">
-                <span class="currency">$</span>
-                <span class="amount">1,499</span>
-                <span class="period">/month</span>
-              </div>
-              <p>For mid-sized medical facilities</p>
-            </div>
-            <div class="pricing-features">
-              <ul>
-                <li>Up to 50 practitioners</li>
-                <li>All Standard features</li>
-                <li>Advanced billing & insurance</li>
-                <li>Staff management</li>
-                <li>Inventory tracking</li>
-                <li>24/7 phone & email support</li>
-              </ul>
-            </div>
-            <button class="btn btn-primary btn-block">Get Started</button>
-          </div>
-
-          <div class="pricing-card">
-            <div class="pricing-header">
-              <h3>Enterprise</h3>
-              <div class="price">
-                <span>Custom Pricing</span>
-              </div>
-              <p>For hospitals and medical networks</p>
-            </div>
-            <div class="pricing-features">
-              <ul>
-                <li>Unlimited practitioners</li>
-                <li>All Professional features</li>
-                <li>Custom integrations</li>
-                <li>Advanced analytics</li>
-                <li>Dedicated account manager</li>
-                <li>On-site training</li>
-              </ul>
-            </div>
-            <button class="btn btn-outline btn-block">Contact Sales</button>
-          </div>
-        </div>
-      </div>
-    </section>
+    <PricingSection />
 
     <!-- Contact -->
     <section id="contact" class="contact">
@@ -219,11 +143,15 @@
 
     <!-- Footer -->
     <FooterSection />
+
+    <CookiesBanner />
   </div>
 </template>
 
 <script>
+import CookiesBanner from "../components/CookiesBanner.vue";
 import FooterSection from "./FooterSection.vue";
+import PricingSection from "./PricingSection.vue";
 import ProductMarketingSection from "./ProductMarketingSection.vue";
 import TestimonialSection from "./TestimonialSection.vue";
 
@@ -233,6 +161,8 @@ export default {
     TestimonialSection,
     FooterSection,
     ProductMarketingSection,
+    CookiesBanner,
+    PricingSection,
   },
   data() {
     return {
@@ -448,108 +378,6 @@ export default {
 
   .step p {
     color: var(--text-light);
-  }
-
-  /* Pricing Section */
-  .pricing {
-    background-color: var(--grey-light);
-  }
-
-  .pricing-tiers {
-    display: flex;
-    justify-content: center;
-    gap: 30px;
-  }
-
-  .pricing-card {
-    background-color: var(--white);
-    border-radius: var(--radius);
-    box-shadow: var(--shadow);
-    padding: 40px;
-    flex: 1;
-    max-width: 350px;
-    position: relative;
-  }
-
-  .pricing-card.featured {
-    border: 2px solid var(--primary);
-    transform: scale(1.05);
-  }
-
-  .popular-tag {
-    position: absolute;
-    top: -15px;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: var(--primary);
-    color: var(--white);
-    padding: 8px 20px;
-    border-radius: 20px;
-    font-weight: 600;
-    font-size: 14px;
-  }
-
-  .pricing-header {
-    text-align: center;
-    margin-bottom: 30px;
-  }
-
-  .pricing-header h3 {
-    font-size: 28px;
-    margin-bottom: 20px;
-  }
-
-  .price {
-    display: flex;
-    align-items: baseline;
-    justify-content: center;
-    margin-bottom: 10px;
-  }
-
-  .currency {
-    font-size: 24px;
-    font-weight: 600;
-  }
-
-  .amount {
-    font-size: 48px;
-    font-weight: 700;
-    margin: 0 4px;
-  }
-
-  .period {
-    font-size: 18px;
-    color: var(--text-light);
-  }
-
-  .pricing-header p {
-    color: var(--text-light);
-    font-size: 16px;
-  }
-
-  .pricing-features {
-    margin-bottom: 30px;
-  }
-
-  .pricing-features ul {
-    list-style: none;
-  }
-
-  .pricing-features li {
-    padding: 10px 0;
-    border-bottom: 1px solid var(--grey);
-    color: var(--text);
-  }
-
-  .pricing-features li:last-child {
-    border-bottom: none;
-  }
-
-  .pricing-features li::before {
-    content: "✓";
-    color: var(--primary);
-    margin-right: 10px;
-    font-weight: bold;
   }
 
   /* Contact Section */
