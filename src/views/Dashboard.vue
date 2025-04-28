@@ -1,38 +1,7 @@
 <template>
   <div class="user-dashboard-container">
     <!-- Hero Section -->
-    <section id="home" class="hero">
-      <div class="container">
-        <div class="hero-content">
-          <h1>Streamline Your Hospital Management</h1>
-          <p>
-            An all-in-one platform for healthcare providers to manage patients,
-            staff, appointments, and resources efficiently.
-          </p>
-
-          <div class="hero-stats">
-            <div class="stat">
-              <span class="stat-number">500+</span>
-              <span class="stat-label">Hospitals</span>
-            </div>
-            <div class="stat">
-              <span class="stat-number">10k+</span>
-              <span class="stat-label">Medical Staff</span>
-            </div>
-            <div class="stat">
-              <span class="stat-number">1M+</span>
-              <span class="stat-label">Patients</span>
-            </div>
-          </div>
-        </div>
-        <div class="hero-image">
-          <img
-            src="../assets/svgs/hero-image.png"
-            alt="Hospital Management System"
-          />
-        </div>
-      </div>
-    </section>
+    <HeroLanding />
 
     <!-- Features Section -->
     <ProductMarketingSection />
@@ -151,6 +120,7 @@
 <script>
 import CookiesBanner from "../components/CookiesBanner.vue";
 import FooterSection from "./FooterSection.vue";
+import HeroLanding from "./HeroLanding.vue";
 import PricingSection from "./PricingSection.vue";
 import ProductMarketingSection from "./ProductMarketingSection.vue";
 import TestimonialSection from "./TestimonialSection.vue";
@@ -163,6 +133,7 @@ export default {
     ProductMarketingSection,
     CookiesBanner,
     PricingSection,
+    HeroLanding,
   },
   data() {
     return {
@@ -256,76 +227,6 @@ export default {
     background-color: var(--primary);
     color: var(--white);
   }
-
-  /* Hero Section */
-  .hero {
-    background-color: var(--grey-light);
-    padding: 100px 0;
-  }
-
-  .hero .container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 40px;
-  }
-
-  .hero-content {
-    flex: 1;
-  }
-
-  .hero-content h1 {
-    font-size: 48px;
-    line-height: 1.2;
-    margin-bottom: 24px;
-    color: var(--text);
-  }
-
-  .hero-content p {
-    font-size: 20px;
-    color: var(--text-light);
-    margin-bottom: 32px;
-  }
-
-  .hero-buttons {
-    display: flex;
-    gap: 16px;
-    margin-bottom: 40px;
-  }
-
-  .hero-stats {
-    display: flex;
-    gap: 32px;
-  }
-
-  .stat {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .stat-number {
-    font-size: 28px;
-    font-weight: 700;
-    color: var(--primary);
-  }
-
-  .stat-label {
-    font-size: 16px;
-    color: var(--text-light);
-  }
-
-  .hero-image {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex: 1;
-  }
-
-  .hero-image img {
-    width: 70%;
-  }
-
-  /* Features Section */
 
   /* How it Works */
   .how-it-works {
