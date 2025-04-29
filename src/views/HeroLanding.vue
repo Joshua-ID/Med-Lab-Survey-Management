@@ -83,7 +83,7 @@ export default {
 <style scoped>
 .hero {
   background: linear-gradient(135deg, #f8f9ff 0%, #eef2ff 100%);
-  padding: 120px 0 80px;
+  height: 90dvh;
   overflow: hidden;
   position: relative;
 }
@@ -94,6 +94,7 @@ export default {
   justify-content: space-between;
   gap: 60px;
   max-width: 1400px;
+  height: 100%;
   margin: 0 auto;
   padding: 0 40px;
 }

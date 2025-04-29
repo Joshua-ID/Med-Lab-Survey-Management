@@ -9,9 +9,9 @@
       <Carousel
         :value="testimonials"
         :numVisible="3"
-        :numScroll="1"
+        :numScroll="3"
         circular
-        :autoplayInterval="2000"
+        :autoplayInterval="4000"
         :responsiveOptions="responsiveOptions"
       >
         <template #item="{ data }">
@@ -131,15 +131,27 @@ export default {
   border-radius: var(--radius);
   box-shadow: var(--shadow);
   padding: 1.5rem;
-  height: 230px;
+  height: 200px;
   display: flex;
   gap: 1rem;
   flex-direction: column;
+  margin-left: 1rem;
   justify-content: space-between;
 
   @media (max-width: 768px) {
-    height: 180px;
+    margin-left: 0;
+    height: 150px;
   }
+
+  @media (max-width: 500px) {
+    margin-left: 0;
+    height: 190px;
+  }
+}
+
+.p-carousel-item-list {
+  width: 100%;
+  height: 220px;
 }
 
 .testimonial-content p {
