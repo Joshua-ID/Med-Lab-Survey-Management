@@ -122,7 +122,7 @@ export default {
   },
   computed: {
     formattedModalDescription() {
-      return `Are you sure you want to delete ${this.userToDelete.name}`;
+      return `Are you sure you want to delete ${this.userToDelete?.name}`;
     },
   },
   created() {

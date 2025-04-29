@@ -8,6 +8,9 @@ import NotFoundPage from "../views/NotFoundPage.vue";
 import MonitoringAdmin from "../views/MonitoringAdmin.vue";
 
 const routes = [
+  // redirect to dashboard
+  { path: "/", redirect: "/dashboard" },
+
   // login
   { path: "/auth-login", component: Login },
   { path: "/register", component: Register },

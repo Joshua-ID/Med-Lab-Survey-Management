@@ -3,11 +3,13 @@
     <div class="container">
       <div class="footer-content">
         <div class="footer-brand">
-          <img
-            class="brand-logo"
-            src="../assets/svgs/brand-logo.svg"
-            alt="Med-Lab-Survey Logo"
-          />
+          <a href="/" class="brand-link">
+            <img
+              class="brand-logo"
+              src="../assets/svgs/brand-logo.svg"
+              alt="Med-Lab-Survey Logo"
+            />
+          </a>
           <p>
             Modern hospital management solutions for healthcare providers of all
             sizes.
