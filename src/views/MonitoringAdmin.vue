@@ -282,7 +282,7 @@ export default {
 .dashboard-title {
   font-size: clamp(1.5rem, 4vw, 1.8rem);
   font-weight: 600;
-  color: #1e293b;
+  color: var(--st-surface-text);
   margin-bottom: 1.5rem;
   text-align: center;
 }
@@ -295,7 +295,7 @@ export default {
 }
 
 .stat-card {
-  background: #fff;
+  background: var(--st-surface-card);
   border-radius: 12px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   padding: 1.25rem;
@@ -348,7 +348,7 @@ export default {
 .stat-content h3 {
   font-size: 0.875rem;
   font-weight: 500;
-  color: #64748b;
+  color: var(--st-surface-text);
   margin-bottom: 0.25rem;
   white-space: nowrap;
   overflow: hidden;
@@ -358,7 +358,7 @@ export default {
 .stat-value {
   font-size: 1.25rem;
   font-weight: 700;
-  color: #1e293b;
+  color: var(--st-surface-sleek);
   margin-bottom: 0.25rem;
   white-space: nowrap;
 }
@@ -392,7 +392,7 @@ export default {
 }
 
 .chart-container {
-  background: #fff;
+  background: var(--st-surface-card);
   border-radius: 12px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   padding: 1rem;
@@ -403,14 +403,6 @@ export default {
 .chart-container:hover {
   transform: translateY(-2px);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.chart-container h3 {
-  font-size: 1rem;
-  font-weight: 600;
-  color: #1e293b;
-  margin-bottom: 0.5rem;
-  text-align: center;
 }
 
 .chart-box {

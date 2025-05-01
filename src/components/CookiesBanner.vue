@@ -40,7 +40,7 @@ export default {
         severity: "warn",
         summary: "Cookies Declined",
         detail: "No cookies is set yet.",
-        life: 3000,
+        life: 10000,
       });
     },
   },
@@ -54,7 +54,7 @@ export default {
         return;
       }
       this.showBanner = true;
-    }, 1000);
+    }, 2000);
   },
 };
 </script>
@@ -65,7 +65,7 @@ export default {
   bottom: 0;
   left: 0;
   right: 0;
-  background-color: #f8f9fa;
+  background-color: var(--st-surface-sleek);
   padding: 2rem;
   z-index: 1000;
 
@@ -75,6 +75,7 @@ export default {
   justify-content: space-between;
 
   .ctx-text {
+    color: var(--white);
     max-width: 500px;
     width: 100%;
     flex: 50%;
@@ -87,6 +88,9 @@ export default {
     gap: 1rem;
 
     .ctx-btn {
+      background-color: var(--st-surface-secondary);
+      border: none;
+      outline: none;
       max-width: 150px;
       width: 100%;
     }

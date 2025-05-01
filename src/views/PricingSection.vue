@@ -31,7 +31,11 @@
             </div>
             <div class="pricing-features">
               <ul>
-                <li v-for="(item, index) in tier.listItems" :key="index">
+                <li
+                  class="tier-item"
+                  v-for="(item, index) in tier.listItems"
+                  :key="index"
+                >
                   {{ item }}
                 </li>
               </ul>
@@ -133,7 +137,7 @@ export default {
 }
 
 .pricing-card {
-  background-color: var(--white);
+  background-color: var(--st-surface-card);
   border-radius: var(--radius);
   box-shadow: var(--shadow);
   padding: 40px;
@@ -204,12 +208,12 @@ export default {
 
 .pricing-features ul {
   list-style: none;
+  color: var(--st-surface-text);
 }
 
 .pricing-features li {
   padding: 10px 0;
   border-bottom: 1px solid var(--grey);
-  color: var(--text);
 }
 
 .pricing-features li:last-child {

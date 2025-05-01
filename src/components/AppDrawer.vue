@@ -86,7 +86,7 @@ export default {
       border-radius: 15px;
       cursor: pointer;
       text-decoration: none;
-      color: var(--st-surface-text);
+      color: var(--st-surface-background);
       transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
 
       &:hover {

@@ -13,7 +13,6 @@
   --white: #e9f1f7;
   --sleek-color: #a653f0;
   --dark: #131b23;
-
   --primary: #6d28d9;
   --primary-dark: #321d7c;
   --secondary: #194a7a;
@@ -29,8 +28,64 @@
 }
 
 .dark {
-  background-color: var(--primary-color);
+  background-color: var(--dark);
   color: var(--white);
+
+  .section-header h2 {
+    color: var(--white) !important;
+  }
+
+  .auth-container {
+    mix-blend-mode: normal;
+  }
+
+  .auth-form {
+    background: var(--dark) !important;
+    color: var(--white);
+  }
+
+  .p-dialog {
+    background-color: var(--dark);
+    outline: none;
+    border: 1px solid var(--grey-light);
+    color: var(--white);
+  }
+
+  .p-drawer {
+    background-color: var(--dark);
+    outline: none;
+    border: none;
+    color: var(--white);
+  }
+
+  .p-datatable-header,
+  .p-datatable-header-cell,
+  .p-row-even,
+  .p-row-odd {
+    background-color: var(--dark);
+    color: var(--white);
+  }
+
+  .p-paginator {
+    background-color: var(--dark);
+    border: none;
+    outline: none;
+  }
+
+  .item:hover {
+    color: var(--dark);
+    background-color: var(--st-primary-color);
+  }
+
+  .hero,
+  .features,
+  .how-it-works,
+  .contact,
+  .pricing,
+  .dashboard-wrapper,
+  .footer {
+    background: var(--dark) !important;
+  }
 }
 
 body {
@@ -43,11 +98,8 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    /* backdrop-filter: opacity(20%); */
-
     background-image: linear-gradient(rgba(0, 0, 0, 0.77), rgba(0, 0, 0, 0.71)),
       url("./assets/svgs/background.jpg");
-
     background-repeat: no-repeat;
     background-size: cover;
     mix-blend-mode: overlay;

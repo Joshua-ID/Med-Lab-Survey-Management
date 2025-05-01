@@ -22,7 +22,7 @@ export default {
 
 <style>
 .feature-card {
-  background-color: var(--white);
+  background-color: var(--st-surface-card);
   border-radius: var(--radius);
   padding: 30px;
   box-shadow: var(--shadow);
@@ -61,8 +61,8 @@ export default {
     font-size: clamp(0.875rem, 0.8085rem + 0.2128vw, 1rem);
   }
 
-  .card-description p {
-    color: var(--text-light);
+  .card-description {
+    color: var(--st-surface-text);
     font-size: clamp(0.8125rem, 0.7128rem + 0.3191vw, 1rem);
   }
 }

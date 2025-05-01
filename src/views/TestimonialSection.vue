@@ -159,7 +159,7 @@ export default {
 .testimonial-content p {
   font-size: clamp(0.875rem, 0.8393rem + 0.1786vw, 1rem);
   font-style: italic;
-  color: var(--text);
+  color: var(--st-surface-text);
   line-height: 1.5;
 }
 
