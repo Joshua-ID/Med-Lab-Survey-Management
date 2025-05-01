@@ -91,7 +91,7 @@ import {
   deleteDoc,
 } from "firebase/firestore";
 import { Column, DataTable, Select, SpeedDial } from "primevue";
-import ConfirmationDialog from "../components/confirmationDialog.vue";
+import ConfirmationDialog from "../components/ConfirmationDialog.vue";
 
 export default {
   name: "AdminUsers",

@@ -29,7 +29,7 @@
 
 <script>
 import { Paginator } from "primevue";
-import UserCardComponent from "../components/userCardComponent.vue";
+import UserCardComponent from "../components/UserCardComponent.vue";
 import { fetchStaffRandom } from "../utils/fetchDataStore";
 
 export default {

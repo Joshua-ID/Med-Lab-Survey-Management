@@ -30,7 +30,7 @@
 
 <script>
 import { ProgressSpinner } from "primevue";
-import UserCardComponent from "../components/userCardComponent.vue";
+import UserCardComponent from "../components/UserCardComponent.vue";
 import { fetchStaffRandom } from "../utils/fetchDataStore";
 import Paginator from "primevue/paginator";
 
