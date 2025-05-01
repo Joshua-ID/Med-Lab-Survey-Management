@@ -72,8 +72,12 @@
     outline: none;
   }
 
+  .item {
+    color: var(--white) !important;
+  }
+
   .item:hover {
-    color: var(--dark);
+    color: var(--dark) !important;
     background-color: var(--st-primary-color);
   }
 
