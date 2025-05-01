@@ -21,7 +21,7 @@
     <Paginator
       :rows="itemsPerPage"
       :totalRecords="staffList.length"
-      :rowsPerPageOptions="[16, 32, 48]"
+      :rowsPerPageOptions="[18, 30, 50]"
       @page="onPageChange"
       class="custom-paginator"
     />
@@ -45,10 +45,10 @@ export default {
     const placeholderData = Array(60).fill({}); // Fake staff
     return {
       staffList: placeholderData,
-      paginatedStaff: placeholderData.slice(0, 16), // Initial page
+      paginatedStaff: placeholderData.slice(0, 18), // Initial page
       isLoading: true,
       first: 0,
-      itemsPerPage: 16,
+      itemsPerPage: 18,
     };
   },
 

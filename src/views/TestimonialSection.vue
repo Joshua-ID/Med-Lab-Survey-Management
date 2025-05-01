@@ -20,7 +20,7 @@
               <p>"{{ data.testimonial }}"</p>
             </div>
             <div class="testimonial-author">
-              <img :src="data.image" :alt="data.name" />
+              <Image :src="data.image" :alt="data.name" preview />
               <div>
                 <h4>{{ data.name }}</h4>
                 <p>{{ data.position }}</p>
@@ -34,12 +34,14 @@
 </template>
 
 <script>
+import { Image } from "primevue";
 import Carousel from "primevue/carousel";
 
 export default {
   name: "TestimonialSection",
   components: {
     Carousel,
+    Image,
   },
   data() {
     return {

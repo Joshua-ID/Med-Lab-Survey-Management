@@ -20,7 +20,7 @@
     <Paginator
       :rows="itemsPerPage"
       :totalRecords="doctorList.length"
-      :rowsPerPageOptions="[16, 32, 48]"
+      :rowsPerPageOptions="[18, 30, 50]"
       @page="onPageChange"
       class="custom-paginator"
     />
@@ -41,8 +41,8 @@ export default {
       doctorList: placeholderData,
       isLoading: true,
       first: 0,
-      itemsPerPage: 16,
-      paginatedDoctor: placeholderData.slice(0, 16), // Initial fake page
+      itemsPerPage: 18,
+      paginatedDoctor: placeholderData.slice(0, 18), // Initial fake page
     };
   },
 
