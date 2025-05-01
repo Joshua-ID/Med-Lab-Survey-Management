@@ -24,9 +24,9 @@
 import { Avatar } from "primevue";
 import AppDrawer from "../components/AppDrawer.vue";
 import ToggleMoodComponent from "../components/toggleMoodComponent.vue";
-import ConfirmationDialog from "./confirmationDialog.vue";
 import { signOut } from "firebase/auth";
 import { auth } from "../firebase";
+import ConfirmationDialog from "./ConfirmationDialog.vue";
 
 export default {
   name: "HeaderNavigator",
