@@ -127,6 +127,10 @@ body {
       text-align: center;
       backdrop-filter: blur(10px);
 
+      @media screen and (max-width: 360px) {
+        padding: 2.5rem;
+      }
+
       .auth-card {
         display: flex;
         flex-direction: column;
@@ -169,6 +173,12 @@ body {
 
     .empty-state-text {
       font-weight: bold;
+    }
+  }
+
+  @media (max-device-width: 500px) {
+    td {
+      padding: 8px !important;
     }
   }
 }

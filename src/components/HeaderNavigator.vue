@@ -74,6 +74,10 @@ export default {
   z-index: 1000;
   box-shadow: var(--shadow);
 
+  @media (max-width: 500px) {
+    padding: 1rem;
+  }
+
   .avatar-and-theme {
     display: flex;
     justify-content: flex-end;

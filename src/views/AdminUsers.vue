@@ -242,6 +242,11 @@ export default {
   display: flex;
   flex-direction: column;
   gap: 2rem;
+  font-size: clamp(0.8125rem, 0.746rem + 0.2128vw, 0.9375rem);
+
+  @media (max-width: 500px) {
+    padding: 1rem;
+  }
 
   .image {
     border-radius: 50%;
@@ -249,6 +254,11 @@ export default {
     height: 60px;
     border: 2px solid var(--st-surface-sleek);
     object-fit: cover;
+
+    @media (max-width: 500px) {
+      width: 40px;
+      height: 40px;
+    }
   }
 
   .actions-column {

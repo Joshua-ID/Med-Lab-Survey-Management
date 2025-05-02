@@ -40,7 +40,7 @@ export default {
         severity: "warn",
         summary: "Cookies Declined",
         detail: "No cookies is set yet.",
-        life: 10000,
+        life: 100000,
       });
     },
   },
@@ -54,13 +54,12 @@ export default {
         return;
       }
       this.showBanner = true;
-    }, 2000);
+    }, 100000);
   },
 };
 </script>
 <style>
 .cookies-banner {
-  height: 100px;
   position: fixed;
   bottom: 0;
   left: 0;
@@ -68,31 +67,44 @@ export default {
   background-color: var(--st-surface-sleek);
   padding: 2rem;
   z-index: 1000;
-
   display: flex;
   gap: 1rem;
   align-items: center;
   justify-content: space-between;
 
+  @media (max-width: 500px) {
+    padding: 1rem;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
   .ctx-text {
     color: var(--white);
+    font-size: clamp(0.8125rem, 0.7128rem + 0.3191vw, 1rem);
     max-width: 500px;
     width: 100%;
-    flex: 50%;
   }
 
   .ctx-btns-wrapper {
     display: flex;
-    justify-content: flex-end;
-    flex: 50%;
     gap: 1rem;
 
+    @media (max-width: 600px) {
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    @media (max-width: 500px) {
+      flex-direction: row;
+      gap: 0.5rem;
+    }
+
     .ctx-btn {
+      font-size: clamp(0.8125rem, 0.7128rem + 0.3191vw, 1rem);
       background-color: var(--st-surface-secondary);
       border: none;
       outline: none;
-      max-width: 150px;
-      width: 100%;
+      min-width: 100px;
     }
   }
 }

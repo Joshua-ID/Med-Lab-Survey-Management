@@ -299,25 +299,38 @@ export default {
   display: flex;
   flex-direction: column;
   gap: 2rem;
+  font-size: clamp(0.8125rem, 0.746rem + 0.2128vw, 0.9375rem);
+
+  @media (max-width: 500px) {
+    padding: 1rem;
+  }
 }
 
 .table-data {
+  .p-datatable-header {
+    padding: 10px 0;
+  }
+
   .table-action-wrapper {
     display: flex;
     gap: 1rem;
     justify-self: end;
 
     .filter-input {
+      font-size: clamp(0.8125rem, 0.746rem + 0.2128vw, 0.9375rem);
       width: 400px !important;
 
-      @media (max-device-width: 768px) {
-        width: auto;
+      @media (max-device-width: 900px) {
+        width: 300px !important;
+      }
+      @media (max-device-width: 500px) {
+        width: unset !important;
       }
     }
 
     .add-button {
       white-space: nowrap;
-      padding: 10px 2rem !important;
+      font-size: clamp(0.8125rem, 0.746rem + 0.2128vw, 0.9375rem);
     }
   }
 }
