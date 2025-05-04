@@ -40,7 +40,7 @@ export default {
         severity: "warn",
         summary: "Cookies Declined",
         detail: "No cookies is set yet.",
-        life: 100000,
+        life: 3000,
       });
     },
   },
@@ -54,7 +54,18 @@ export default {
         return;
       }
       this.showBanner = true;
-    }, 100000);
+    }, 7000);
+  },
+
+  updated() {
+    const getCookies = localStorage.getItem("cookiesAccepted");
+    setTimeout(() => {
+      // Check if the user has already accepted or declined cookies
+      if (getCookies === "true") {
+        return;
+      }
+      this.showBanner = true;
+    }, 150000);
   },
 };
 </script>
