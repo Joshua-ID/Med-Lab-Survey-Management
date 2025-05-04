@@ -1,5 +1,13 @@
 # Vue 3 + Vite
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs
 
-Learn more about IDE Support for Vue in the [Vue Docs Scaling up Guide](https://vuejs.org/guide/scaling-up/tooling.html#ide-support).
+Point your env
+VITE_FIREBASE_API_KEY,
+VITE_FIREBASE_AUTH_DOMAIN,
+VITE_FIREBASE_PROJECT_ID,
+VITE_FIREBASE_STORAGE_BUCKET,
+VITE_FIREBASE_MESSAGING_SENDER_ID,
+VITE_FIREBASE_APP_ID,
+VITE_API_URL_DUMMY,
+VITE_API_URL_RANDOM
