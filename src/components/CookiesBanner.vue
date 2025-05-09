@@ -1,14 +1,16 @@
 <template>
-  <div class="cookies-banner" v-if="showBanner">
-    <p class="ctx-text">
-      We use cookies to enhance your experience. By continuing to visit this
-      site, you agree to our use of cookies.
-    </p>
-    <div class="ctx-btns-wrapper">
-      <Button class="ctx-btn" @click="acceptCookie">Accept All</Button>
-      <Button class="ctx-btn" @click="declineCookies">Reject</Button>
+  <Transition name="slide-up" mode="out-in">
+    <div class="cookies-banner" v-if="showBanner">
+      <p class="ctx-text">
+        We use cookies to enhance your experience. By continuing to visit this
+        site, you agree to our use of cookies.
+      </p>
+      <div class="ctx-btns-wrapper">
+        <Button class="ctx-btn" @click="acceptCookie">Accept All</Button>
+        <Button class="ctx-btn" @click="declineCookies">Reject</Button>
+      </div>
     </div>
-  </div>
+  </Transition>
 </template>
 
 <script>

@@ -252,10 +252,6 @@ h1 {
     max-width: 100%;
   }
 
-  .cta-buttons {
-    justify-content: center;
-  }
-
   .hero-stats {
     justify-content: center;
   }
