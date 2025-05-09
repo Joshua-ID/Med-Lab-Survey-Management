@@ -73,28 +73,28 @@ export default {
           position: "Medical Director, City General Hospital",
           testimonial:
             "Implementing this hospital management system has transformed our operations.",
-          image: "/src/assets/svgs/woman-1.png",
+          image: "../../public/woman-2.png",
         },
         {
           name: "Dr. Michael Chen",
           position: "Chief of Medicine, Westside Medical Center",
           testimonial:
             "The patient management features are outstanding. We can access complete patient history instantly.",
-          image: "/src/assets/svgs/man-2.png",
+          image: "../../public/man-1.png",
         },
         {
           name: "Nurse Linda Park",
           position: "Lead Nurse, Sunrise Hospital",
           testimonial:
             "The scheduling and shift management are so much more efficient.",
-          image: "/src/assets/svgs/woman-2.png",
+          image: "../../public/woman-1.png",
         },
         {
           name: "Dr. Andrew Smith",
           position: "Resident Surgeon, Green Valley Clinic",
           testimonial:
             "Data access is instant, making surgeries more streamlined.",
-          image: "/src/assets/svgs/man-4.png",
+          image: "../../public/man-4.png",
         },
         {
           name: "Emily Tran",
@@ -106,7 +106,7 @@ export default {
           name: "Dr. Brian Okoro",
           position: "Pediatrician, Happy Hearts Hospital",
           testimonial: "Child patient history tracking has never been easier.",
-          image: "/src/assets/svgs/man-1.png",
+          image: "../../public/man-1.png",
         },
         {
           name: "Cynthia Okafor",
@@ -118,10 +118,8 @@ export default {
           name: "Dr. Fatima Yusuf",
           position: "Gynecologist, WomanCare Center",
           testimonial: "Pregnancy and post-natal tracking is now seamless.",
-          image: "/src/assets/svgs/man-3.png",
+          image: "../../public/man-3.png",
         },
-
-        // Add more if needed
       ],
     };
   },
