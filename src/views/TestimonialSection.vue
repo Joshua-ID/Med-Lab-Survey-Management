@@ -20,7 +20,11 @@
               <p>"{{ data.testimonial }}"</p>
             </div>
             <div class="testimonial-author">
-              <Image :src="data.image" :alt="data.name" preview />
+              <Image
+                :src="data?.image || defaultImage"
+                :alt="data.name"
+                preview
+              />
               <div>
                 <h4>{{ data.name }}</h4>
                 <p>{{ data.position }}</p>
@@ -45,6 +49,7 @@ export default {
   },
   data() {
     return {
+      defaultImage: "/public/default-user-icon.png",
       responsiveOptions: [
         {
           breakpoint: "1400px",
@@ -100,7 +105,7 @@ export default {
           name: "Emily Tran",
           position: "Admin Officer, Medilink Hospitals",
           testimonial: "Billing and records are now paperless and hassle-free.",
-          image: "/src/assets/svgs/woman-1.png",
+          image: "../../public/woman-1.png",
         },
         {
           name: "Dr. Brian Okoro",
@@ -109,10 +114,10 @@ export default {
           image: "../../public/man-1.png",
         },
         {
-          name: "Cynthia Okafor",
+          name: "Okafor Splendor",
           position: "Receptionist, Grace Wellness",
           testimonial: "Easy for staff to use, especially new recruits.",
-          image: "/src/assets/svgs/woman-2.png",
+          image: "../../public/man-4.png",
         },
         {
           name: "Dr. Fatima Yusuf",
