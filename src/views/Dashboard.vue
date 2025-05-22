@@ -74,6 +74,7 @@
                 <i class="pi pi-map-marker"></i>
                 <span>123 Medical Plaza, San Francisco, CA 94103</span>
               </div>
+              <Button @click="toggleViewMap" label="View Map Location" />
             </div>
           </div>
 
@@ -103,10 +104,21 @@
                   placeholder="How can we help you?"
                 ></textarea>
               </div>
-              <button class="btn btn-primary btn-block">Request Demo</button>
+              <Button label="Submit Form" />
             </form>
           </div>
         </div>
+      </div>
+
+      <!-- google map -->
+      <div v-show="viewMap">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3964.4787395885855!2d3.571689575753518!3d6.4608685238864405!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x103bf7536cb7a6c9%3A0xfaa9961aa7378045!2sELLAS%20COURT%202!5e0!3m2!1sen!2sng!4v1747737481370!5m2!1sen!2sng"
+          width="100%"
+          height="450"
+          style="border: 0; margin-top: 20px; padding: 24px"
+          loading="lazy"
+        ></iframe>
       </div>
     </section>
 
@@ -137,8 +149,14 @@ export default {
   },
   data() {
     return {
+      viewMap: false,
       user: JSON.parse(localStorage.getItem("user")) || {},
     };
+  },
+  methods: {
+    toggleViewMap() {
+      this.viewMap = !this.viewMap;
+    },
   },
 };
 </script>
