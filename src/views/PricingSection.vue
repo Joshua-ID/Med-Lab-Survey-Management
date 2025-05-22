@@ -120,6 +120,12 @@ export default {
     activatePlan(tier) {
       this.pricingTiers.forEach((x) => (x.selectedPlan = false));
       tier.selectedPlan = true;
+      this.$toast.add({
+        severity: "info",
+        summary: "Plan Activated",
+        detail: `You have selected the ${tier.name} plan.`,
+        life: 3000,
+      });
     },
   },
 };
