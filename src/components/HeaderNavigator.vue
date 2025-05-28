@@ -39,7 +39,7 @@ export default {
   data() {
     return {
       visible: false,
-      defaultAvatar: "/public/default-user-icon.png",
+      defaultAvatar: "../assets/svgs/default-user-icon.png",
     };
   },
   methods: {
