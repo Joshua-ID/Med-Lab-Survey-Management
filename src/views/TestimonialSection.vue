@@ -49,7 +49,7 @@ export default {
   },
   data() {
     return {
-      defaultImage: "../assets/svgs/default-user-icon.png",
+      defaultImage: "/default-user-icon.png",
       responsiveOptions: [
         {
           breakpoint: "1400px",
@@ -78,52 +78,52 @@ export default {
           position: "Medical Director, City General Hospital",
           testimonial:
             "Implementing this hospital management system has transformed our operations.",
-          image: "../assets/svgs/woman-2.png",
+          image: "/woman-2.png",
         },
         {
           name: "Dr. Michael Chen",
           position: "Chief of Medicine, Westside Medical Center",
           testimonial:
             "The patient management features are outstanding. We can access complete patient history instantly.",
-          image: "../assets/svgs/man-1.png",
+          image: "/man-1.png",
         },
         {
           name: "Nurse Linda Park",
           position: "Lead Nurse, Sunrise Hospital",
           testimonial:
             "The scheduling and shift management are so much more efficient.",
-          image: "../assets/svgs/woman-1.png",
+          image: "/woman-1.png",
         },
         {
           name: "Dr. Andrew Smith",
           position: "Resident Surgeon, Green Valley Clinic",
           testimonial:
             "Data access is instant, making surgeries more streamlined.",
-          image: "../assets/svgs/man-4.png",
+          image: "/man-4.png",
         },
         {
           name: "Emily Tran",
           position: "Admin Officer, Medilink Hospitals",
           testimonial: "Billing and records are now paperless and hassle-free.",
-          image: "../assets/svgs/woman-1.png",
+          image: "/woman-1.png",
         },
         {
           name: "Dr. Brian Okoro",
           position: "Pediatrician, Happy Hearts Hospital",
           testimonial: "Child patient history tracking has never been easier.",
-          image: "../assets/svgs/man-1.png",
+          image: "/man-1.png",
         },
         {
           name: "Okafor Splendor",
           position: "Receptionist, Grace Wellness",
           testimonial: "Easy for staff to use, especially new recruits.",
-          image: "../assets/svgs/man-4.png",
+          image: "/man-4.png",
         },
         {
           name: "Dr. Fatima Yusuf",
           position: "Gynecologist, WomanCare Center",
           testimonial: "Pregnancy and post-natal tracking is now seamless.",
-          image: "../assets/svgs/man-3.png",
+          image: "/man-3.png",
         },
       ],
     };
