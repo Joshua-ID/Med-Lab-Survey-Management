@@ -121,8 +121,20 @@ export default {
         "user-trend-chart",
         this.getLineChartOption(
           "User Sign-Up Trend",
-          ["Jan", "Feb", "Mar", "Apr", "May"],
-          [120, 200, 150, 80, 70]
+          [
+            "Jan",
+            "Feb",
+            "Mar",
+            "Apr",
+            "May, Jun",
+            "Jul",
+            "Aug",
+            "Sep",
+            "Oct",
+            "Nov",
+            "Dec",
+          ],
+          [50, 80, 120, 150, 200, 180, 220, 300, 400, 50, 80, 120]
         )
       );
 
@@ -184,7 +196,7 @@ export default {
       return {
         title: { text: title, left: "center" },
         tooltip: { trigger: "axis" },
-        grid: { top: "20%", right: "5%", bottom: "15%", left: "5%" },
+        grid: { top: "20%", right: "5%", bottom: "15%", left: "10%" },
         xAxis: { type: "category", data: xData },
         yAxis: { type: "value" },
         series: [
@@ -210,7 +222,7 @@ export default {
       return {
         title: { text: title, left: "center" },
         tooltip: { trigger: "axis" },
-        grid: { top: "20%", right: "5%", bottom: "15%", left: "5%" },
+        grid: { top: "25%", right: "5%", bottom: "15%", left: "12%" },
         [direction === "vertical" ? "xAxis" : "yAxis"]: {
           type: "category",
           data: xData,
@@ -230,21 +242,22 @@ export default {
     getPieChartOption(title, data) {
       return {
         title: { text: title, left: "center" },
-        tooltip: { trigger: "item" },
-        legend: { orient: "horizontal", bottom: 0 },
+        tooltip: { trigger: "item", formatter: "{b}: {c} ({d}%)" },
+        grid: { top: "20%", right: "5%", bottom: "15%", left: "10%" },
+        legend: { orient: "vertical", bottom: 0, left: 0 },
         series: [
           {
             type: "pie",
             radius: ["40%", "70%"],
-            avoidLabelOverlap: false,
+            avoidLabelOverlap: true,
             itemStyle: {
               borderRadius: 10,
               borderColor: "#fff",
               borderWidth: 2,
             },
-            label: { show: true, formatter: "{b}: {c} ({d}%)" },
+            label: { show: false },
             emphasis: {
-              label: { show: true, fontSize: "18", fontWeight: "bold" },
+              label: { show: false },
             },
             data,
           },
@@ -455,7 +468,7 @@ export default {
   }
 
   .chart-box {
-    height: 200px;
+    height: 360px;
   }
 
   .stat-card {
