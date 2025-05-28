@@ -105,7 +105,7 @@ export default {
   data() {
     return {
       visible: false,
-      defaultAvatar: "/public/default-user-icon.png",
+      defaultAvatar: "/default-user-icon.png",
       users: [],
       userToDelete: null,
       editDialog: false,
